@@ -79,17 +79,18 @@ function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: n
     return { label: "Snake Eyes!", colorKey: "snakeeyes", hideSum: false, isRoundDoubled: false };
   }
 
-  // Lucky 11 if option enabled
+  // Lucky 11 if option enabled (works in both safe and danger zone)
   if (isLucky11 && gameOptions?.lucky11) {
     return { label: "Lucky 11!", colorKey: "lucky11", hideSum: false, isRoundDoubled: false };
   }
 
-  // For doubles, hide the sum (just show "double")
-  if (isDouble && roll.resultType === "double") {
+  // For doubles in DANGER ZONE only - show "Doubles! Bank x2"
+  // In safe zone, doubles just add face value like normal rolls
+  if (isDouble && roll.resultType === "double" && !inSafeZone) {
     return { label: "Doubles! Bank x2", colorKey: "double", hideSum: true, isRoundDoubled: false };
   }
 
-  // Default to the result type
+  // Default to the result type (normal, or doubles in safe zone shown as normal)
   return { label: roll.resultType, colorKey: roll.resultType, hideSum: false, isRoundDoubled: false };
 }
 
