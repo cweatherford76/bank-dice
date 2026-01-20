@@ -14,15 +14,6 @@ interface RollHistoryProps {
   safeZoneRolls?: number;
 }
 
-const diceFaces: Record<number, string> = {
-  1: "⚀",
-  2: "⚁",
-  3: "⚂",
-  4: "⚃",
-  5: "⚄",
-  6: "⚅",
-};
-
 const resultColors: Record<string, string> = {
   normal: "bg-zinc-100 text-zinc-800",
   double: "bg-purple-100 text-purple-800",
@@ -143,19 +134,15 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                 </>
               ) : (
                 <>
-                  <span className="text-lg">
-                    {diceFaces[roll.die1]} {diceFaces[roll.die2]}
-                  </span>
-                  <span>=</span>
                   <span className="font-bold">{roll.die1 + roll.die2}</span>
-                  <span className="ml-auto text-xs uppercase tracking-wide">
+                  <span className="text-xs uppercase tracking-wide">
                     {label}
                   </span>
-                  <span className="font-medium">→ {roll.bankAfter}</span>
+                  <span className="ml-auto font-medium">→ {roll.bankAfter}</span>
                   {isBanker && onEditRoll && (
                     <Button
                       size="sm"
-                      variant="ghost"
+                      variant="outline"
                       className="h-6 px-2 text-xs"
                       onClick={() => handleStartEdit(roll)}
                     >
