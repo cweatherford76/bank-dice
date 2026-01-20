@@ -173,23 +173,37 @@ body.theme-retro-arcade {
 /* ===== RETRO NEON THEME (Dark Purple/Vibrant) ===== */
 .theme-retro-neon {
   --background: #0d0d1a;
-  --foreground: #e0e0ff;
+  --foreground: #00ffff;
   --card-bg: #1a1a2e;
-  --card-border: #2a2a4e;
+  --card-border: rgba(255, 0, 255, 0.4);
   --muted: #1a1a2e;
-  --muted-foreground: #9999bb;
+  --muted-foreground: #00cccc;
   --accent: #ff00ff;
-  --accent-foreground: #0d0d1a;
-  --safe-zone-bg: rgba(0, 255, 255, 0.1);
-  --safe-zone-border: #00ffff;
-  --danger-zone-bg: rgba(255, 0, 255, 0.1);
-  --danger-zone-border: #ff00ff;
-  --bust-bg: rgba(255, 107, 53, 0.2);
+  --accent-foreground: #ffffff;
+  --safe-zone-bg: rgba(57, 255, 20, 0.15);
+  --safe-zone-border: #39ff14;
+  --danger-zone-bg: rgba(255, 107, 53, 0.15);
+  --danger-zone-border: #ff6b35;
+  --bust-bg: rgba(255, 107, 53, 0.25);
   --bust-border: #ff6b35;
   --double-bg: rgba(255, 105, 180, 0.2);
   --double-border: #ff69b4;
+  --snakeeyes-bg: rgba(57, 255, 20, 0.2);
+  --snakeeyes-border: #39ff14;
+  --lucky11-bg: rgba(255, 255, 0, 0.2);
+  --lucky11-border: #ffff00;
   --bank-btn-bg: #39ff14;
   --bank-btn-hover: #2ecc10;
+  --banked-color: #39ff14;
+  --leader-color: #ffff00;
+  --current-player-color: #00ffff;
+  --score-color: #ffff00;
+  --neon-magenta-glow: 0 0 8px rgba(255, 0, 255, 0.6), 0 0 16px rgba(255, 0, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.2);
+  --neon-cyan-glow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 16px rgba(0, 255, 255, 0.4);
+  --neon-green-glow: 0 0 8px rgba(57, 255, 20, 0.6), 0 0 16px rgba(57, 255, 20, 0.4);
+  --neon-orange-glow: 0 0 8px rgba(255, 107, 53, 0.6), 0 0 16px rgba(255, 107, 53, 0.4);
+  --neon-yellow-glow: 0 0 8px rgba(255, 255, 0, 0.6), 0 0 16px rgba(255, 255, 0, 0.4);
+  --neon-pink-glow: 0 0 8px rgba(255, 105, 180, 0.6), 0 0 16px rgba(255, 105, 180, 0.4);
 }
 
 .theme-retro-neon body,
