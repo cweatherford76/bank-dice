@@ -7,23 +7,24 @@ import { GameOptions, RollResult, RollResultType } from "@/types/game";
  * - Normal rolls: Add face value to bank (e.g., 3+5 = +8)
  * - Rolls 1-3 (Safe Zone):
  *   - Sum of 7 = +70 points to bank
- *   - Doubles = Face value only (e.g., 4+4 = +8)
+ *   - Doubles = Not allowed (button disabled in safe zone)
  * - Rolls 4+ (Danger Zone):
  *   - Sum of 7 = BUST (bank goes to 0, round ends)
- *   - Doubles = Bank × 2
+ *   - Doubles = Bank × 2 (only when explicitly recorded via Doubles button)
  */
 
 /**
  * Determine the result type of a roll
+ * @param isDoubles - Explicit flag indicating banker pressed Doubles button
  */
 export function getRollResultType(
   die1: number,
   die2: number,
   rollNumber: number,
-  safeZoneRolls: number
+  safeZoneRolls: number,
+  isDoubles: boolean = false
 ): RollResultType {
   const sum = die1 + die2;
-  const isDouble = die1 === die2;
   const inSafeZone = rollNumber <= safeZoneRolls;
 
   if (sum === 7) {
@@ -31,7 +32,9 @@ export function getRollResultType(
     return inSafeZone ? "seven" : "bust";
   }
 
-  if (isDouble) {
+  // Only treat as doubles if explicitly marked (banker pressed Doubles button)
+  // Doubles button is disabled in safe zone, so this should never be true in safe zone
+  if (isDoubles && !inSafeZone) {
     return "double";
   }
 
@@ -40,6 +43,7 @@ export function getRollResultType(
 
 /**
  * Calculate the new bank total after a roll
+ * @param isDoubles - Explicit flag indicating banker pressed Doubles button
  */
 export function calculateRollResult(
   die1: number,
@@ -47,13 +51,13 @@ export function calculateRollResult(
   rollNumber: number,
   currentBank: number,
   consecutiveDoubles: number,
-  options: GameOptions
+  options: GameOptions,
+  isDoubles: boolean = false
 ): RollResult {
   const sum = die1 + die2;
-  const isDouble = die1 === die2;
   const isSnakeEyes = die1 === 1 && die2 === 1;
   const inSafeZone = rollNumber <= options.safeZoneRolls;
-  const resultType = getRollResultType(die1, die2, rollNumber, options.safeZoneRolls);
+  const resultType = getRollResultType(die1, die2, rollNumber, options.safeZoneRolls, isDoubles);
 
   let newBank = currentBank;
   let message = "";
@@ -74,27 +78,20 @@ export function calculateRollResult(
       break;
 
     case "double":
-      if (inSafeZone) {
-        // Doubles in safe zone = face value only
-        newBank += sum;
-        message = `+${sum} Points`;
+      // Doubles in danger zone = multiply bank (only when explicitly recorded)
+      // Check for snake eyes bonus first (x4)
+      if (isSnakeEyes && options.snakeEyesBonus) {
+        newBank *= 4;
+        message = "SNAKE EYES! Bank x4";
+      } else if (options.escalatingDoubles && consecutiveDoubles > 0) {
+        // Escalating doubles: first x2, second x3, third x4, etc.
+        const multiplier = consecutiveDoubles + 2;
+        newBank *= multiplier;
+        message = `DOUBLES! Bank x${multiplier}`;
       } else {
-        // Doubles in danger zone = multiply bank
-
-        // Check for snake eyes bonus first (x4)
-        if (isSnakeEyes && options.snakeEyesBonus) {
-          newBank *= 4;
-          message = "SNAKE EYES! Bank x4";
-        } else if (options.escalatingDoubles && consecutiveDoubles > 0) {
-          // Escalating doubles: first x2, second x3, third x4, etc.
-          const multiplier = consecutiveDoubles + 2;
-          newBank *= multiplier;
-          message = `DOUBLES! Bank x${multiplier}`;
-        } else {
-          // Normal doubles = x2
-          newBank *= 2;
-          message = "DOUBLES! Bank x2";
-        }
+        // Normal doubles = x2
+        newBank *= 2;
+        message = "DOUBLES! Bank x2";
       }
       break;
 

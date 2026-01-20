@@ -192,7 +192,7 @@ export default function GamePage() {
 
   // Handle dice roll
   const handleRoll = useCallback(
-    async (die1: number, die2: number) => {
+    async (die1: number, die2: number, isDoubles: boolean = false) => {
       if (!state.game) return;
 
       const newRollNumber = state.game.rollCount + 1;
@@ -202,7 +202,8 @@ export default function GamePage() {
         newRollNumber,
         state.game.bankTotal,
         state.consecutiveDoubles,
-        state.game.options
+        state.game.options,
+        isDoubles  // Pass the explicit isDoubles flag
       );
 
       // Update consecutive doubles count
@@ -281,6 +282,9 @@ export default function GamePage() {
       const roll = state.rolls.find((r) => r.id === rollId);
       if (!roll) return;
 
+      // For edits, preserve whether this was originally recorded as doubles
+      const wasDoubles = roll.resultType === "double";
+
       // Calculate new result for this roll
       const result = calculateRollResult(
         die1,
@@ -288,7 +292,8 @@ export default function GamePage() {
         roll.rollNumber,
         0, // We'll recalculate bank from scratch
         0, // Ignore consecutive doubles for edit
-        state.game.options
+        state.game.options,
+        wasDoubles  // Preserve whether this was originally recorded as doubles
       );
 
       try {
@@ -316,6 +321,8 @@ export default function GamePage() {
         const updatedRolls = currentRoundRolls.map((r) => {
           const d1 = r.id === rollId ? die1 : r.die1;
           const d2 = r.id === rollId ? die2 : r.die2;
+          // Preserve original doubles status for each roll
+          const rollWasDoubles = r.id === rollId ? wasDoubles : r.resultType === "double";
 
           const rollResult = calculateRollResult(
             d1,
@@ -323,7 +330,8 @@ export default function GamePage() {
             r.rollNumber,
             currentBank,
             consecutiveDoubles,
-            state.game!.options
+            state.game!.options,
+            rollWasDoubles
           );
 
           consecutiveDoubles = rollResult.resultType === "double" ? consecutiveDoubles + 1 : 0;

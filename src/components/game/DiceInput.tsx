@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 interface DiceInputProps {
-  onRoll: (die1: number, die2: number) => void;
+  onRoll: (die1: number, die2: number, isDoubles?: boolean) => void;
   disabled?: boolean;
   inSafeZone?: boolean;
 }
@@ -29,15 +29,16 @@ export function DiceInput({
         die1 = num - 6;
         die2 = 6;
       }
-      onRoll(die1, die2);
+      // Pass false for isDoubles - this is a normal roll
+      onRoll(die1, die2, false);
       setTotal("");
     }
   };
 
   const handleDoubles = () => {
-    // Record a generic doubles roll (3+3 = 6, middle value)
-    // The game engine will detect it as doubles and apply the multiplier
-    onRoll(3, 3);
+    // Record a doubles roll - pass true for isDoubles flag
+    // Use 3+3 as a placeholder (the actual sum doesn't matter for doubles display)
+    onRoll(3, 3, true);
     setTotal("");
   };
 
