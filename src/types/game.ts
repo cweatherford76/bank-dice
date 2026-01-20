@@ -2,7 +2,7 @@
 export type GameStatus = "setup" | "active" | "completed";
 
 // Result of a dice roll
-export type RollResultType = "normal" | "double" | "seven" | "bust";
+export type RollResultType = "normal" | "double" | "seven" | "bust" | "round_doubled";
 
 // Theme options
 export type ThemeId = 'modern' | 'classic' | 'tron' | 'retro-arcade' | 'retro-neon';

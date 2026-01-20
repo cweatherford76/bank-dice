@@ -12,6 +12,7 @@ import { createClient } from "@/lib/supabase/client";
 import { generateUUID,
   calculateRollResult,
   calculateStartingBank,
+  calculateBankAfterRound,
   allPlayersBanked,
 } from "@/lib/game-engine";
 import { Game, Player, Roll, GameOptions, DEFAULT_GAME_OPTIONS } from "@/types/game";
@@ -445,6 +446,40 @@ export default function GamePage() {
     const isGameOver = nextRound > state.game.options.roundCount;
 
     try {
+      // If Double Each Round option is enabled, add a "DOUBLED AFTER ROUND" entry
+      if (state.game.options.doubleEachLap && state.game.bankTotal > 0) {
+        const doubledBank = calculateBankAfterRound(state.game.bankTotal, state.game.options);
+        
+        // Insert the round_doubled roll entry
+        await supabase.from("rolls").insert({
+          game_id: state.game.id,
+          round_number: state.game.currentRound,
+          roll_number: state.game.rollCount + 1,
+          die_1: 0,
+          die_2: 0,
+          result_type: "round_doubled",
+          bank_after: doubledBank,
+        });
+
+        // Add to local state
+        const doubledRoll: Roll = {
+          id: generateUUID(),
+          gameId: state.game.id,
+          roundNumber: state.game.currentRound,
+          rollNumber: state.game.rollCount + 1,
+          die1: 0,
+          die2: 0,
+          resultType: "round_doubled",
+          bankAfter: doubledBank,
+          createdAt: new Date().toISOString(),
+        };
+
+        setState((s) => ({
+          ...s,
+          rolls: [...s.rolls, doubledRoll],
+        }));
+      }
+
       // Reset players for new round
       await supabase
         .from("players")

@@ -47,6 +47,12 @@ const getResultStyle = (colorKey: string): React.CSSProperties => {
         color: 'var(--lucky11-border, var(--leader-color, #f59e0b))',
         borderLeft: '3px solid var(--lucky11-border, var(--leader-color, #f59e0b))',
       };
+    case 'round_doubled':
+      return {
+        background: 'var(--double-bg)',
+        color: 'var(--double-border)',
+        borderLeft: '3px solid var(--double-border)',
+      };
     default:
       return {
         background: 'var(--muted)',
@@ -56,7 +62,12 @@ const getResultStyle = (colorKey: string): React.CSSProperties => {
   }
 };
 
-function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string; hideSum: boolean } {
+function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string; hideSum: boolean; isRoundDoubled: boolean } {
+  // Handle round_doubled special entry
+  if (roll.resultType === "round_doubled") {
+    return { label: "DOUBLED AFTER ROUND", colorKey: "round_doubled", hideSum: true, isRoundDoubled: true };
+  }
+
   const sum = roll.die1 + roll.die2;
   const isDouble = roll.die1 === roll.die2;
   const isSnakeEyes = roll.die1 === 1 && roll.die2 === 1;
@@ -65,21 +76,21 @@ function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: n
 
   // Snake Eyes takes priority if option enabled and in danger zone
   if (isSnakeEyes && gameOptions?.snakeEyesBonus && !inSafeZone) {
-    return { label: "Snake Eyes!", colorKey: "snakeeyes", hideSum: false };
+    return { label: "Snake Eyes!", colorKey: "snakeeyes", hideSum: false, isRoundDoubled: false };
   }
 
   // Lucky 11 if option enabled
   if (isLucky11 && gameOptions?.lucky11) {
-    return { label: "Lucky 11!", colorKey: "lucky11", hideSum: false };
+    return { label: "Lucky 11!", colorKey: "lucky11", hideSum: false, isRoundDoubled: false };
   }
 
   // For doubles, hide the sum (just show "double")
   if (isDouble && roll.resultType === "double") {
-    return { label: "Doubles! Bank x2", colorKey: "double", hideSum: true };
+    return { label: "Doubles! Bank x2", colorKey: "double", hideSum: true, isRoundDoubled: false };
   }
 
   // Default to the result type
-  return { label: roll.resultType, colorKey: roll.resultType, hideSum: false };
+  return { label: roll.resultType, colorKey: roll.resultType, hideSum: false, isRoundDoubled: false };
 }
 
 export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOptions, safeZoneRolls = 3 }: RollHistoryProps) {
@@ -136,7 +147,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
         {currentRoundRolls.map((roll) => {
-          const { label, colorKey, hideSum } = getDisplayLabel(roll, gameOptions, safeZoneRolls);
+          const { label, colorKey, hideSum, isRoundDoubled } = getDisplayLabel(roll, gameOptions, safeZoneRolls);
           const style = getResultStyle(colorKey);
           return (
             <div
@@ -144,7 +155,8 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
               className="flex items-center gap-3 rounded-md px-3 py-2 text-sm"
               style={style}
             >
-              <span className="font-medium">#{roll.rollNumber}</span>
+              {/* Hide roll number for round_doubled entries */}
+              {!isRoundDoubled && <span className="font-medium">#{roll.rollNumber}</span>}
 
               {editingRollId === roll.id ? (
                 <>
@@ -181,7 +193,8 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                     {label}
                   </span>
                   <span className="ml-auto font-medium">→ {roll.bankAfter}</span>
-                  {isBanker && onEditRoll && (
+                  {/* Don't show edit button for round_doubled entries */}
+                  {isBanker && onEditRoll && !isRoundDoubled && (
                     <Button
                       size="sm"
                       variant="outline"
