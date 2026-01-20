@@ -24,12 +24,12 @@ const diceFaces: Record<number, string> = {
 };
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+  normal: "bg-slate-100 text-slate-700",
+  double: "bg-gradient-to-r from-violet-100 to-fuchsia-100 text-violet-800",
+  seven: "bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-800",
+  bust: "bg-gradient-to-r from-rose-100 to-red-100 text-rose-800",
+  snakeeyes: "bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800",
+  lucky11: "bg-gradient-to-r from-pink-100 to-rose-100 text-pink-800",
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -90,7 +90,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-xl border-2 border-dashed border-violet-300 p-4 text-center text-sm text-violet-500 bg-violet-50">
         No rolls yet this round
       </div>
     );
@@ -98,7 +98,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-bold text-violet-600 uppercase tracking-wide">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
@@ -107,7 +107,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
           return (
             <div
               key={roll.id}
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium ${
                 resultColors[colorKey]
               }`}
             >

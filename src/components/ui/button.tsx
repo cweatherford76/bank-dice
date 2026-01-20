@@ -9,16 +9,16 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "default", ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50";
+      "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
     const variants = {
-      default: "bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90",
-      destructive: "bg-red-500 text-zinc-50 shadow-sm hover:bg-red-500/90",
+      default: "bg-violet-600 text-white shadow-md hover:bg-violet-700 active:bg-violet-800",
+      destructive: "bg-rose-500 text-white shadow-sm hover:bg-rose-600 active:bg-rose-700",
       outline:
-        "border border-zinc-200 bg-white shadow-sm hover:bg-zinc-100 hover:text-zinc-900",
-      secondary: "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-100/80",
-      ghost: "hover:bg-zinc-100 hover:text-zinc-900",
-      link: "text-zinc-900 underline-offset-4 hover:underline",
+        "border-2 border-violet-300 bg-white shadow-sm hover:bg-violet-50 hover:border-violet-400 text-violet-700",
+      secondary: "bg-cyan-100 text-cyan-800 shadow-sm hover:bg-cyan-200",
+      ghost: "hover:bg-violet-100 hover:text-violet-800",
+      link: "text-violet-700 underline-offset-4 hover:underline hover:text-violet-900",
     };
 
     const sizes = {
