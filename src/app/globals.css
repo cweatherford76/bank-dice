@@ -294,3 +294,147 @@ body.theme-retro-neon {
   );
   pointer-events: none;
 }
+
+/* ===== THEME-SPECIFIC COMPONENT OVERRIDES ===== */
+
+/* TRON Theme - Glowing cyan borders on all components */
+.theme-tron .rounded-xl,
+body.theme-tron .rounded-xl {
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.theme-tron input,
+body.theme-tron input {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-color: rgba(0, 212, 255, 0.5) !important;
+  color: #00d4ff !important;
+}
+
+.theme-tron input:focus,
+body.theme-tron input:focus {
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3) !important;
+  border-color: #00d4ff !important;
+}
+
+.theme-tron input::placeholder,
+body.theme-tron input::placeholder {
+  color: rgba(0, 212, 255, 0.5) !important;
+}
+
+.theme-tron button[class*="bg-[var(--accent)]"],
+body.theme-tron button[class*="bg-[var(--accent)]"] {
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.theme-tron h1,
+body.theme-tron h1 {
+  color: #00d4ff !important;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+/* RETRO ARCADE Theme - Neon pink/cyan with purple borders */
+.theme-retro-arcade .rounded-xl,
+body.theme-retro-arcade .rounded-xl {
+  box-shadow: 0 0 10px rgba(191, 0, 255, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.theme-retro-arcade input,
+body.theme-retro-arcade input {
+  background: rgba(13, 2, 33, 0.8) !important;
+  border-color: #00ffff !important;
+  color: #00ffff !important;
+}
+
+.theme-retro-arcade input:focus,
+body.theme-retro-arcade input:focus {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3) !important;
+}
+
+.theme-retro-arcade input::placeholder,
+body.theme-retro-arcade input::placeholder {
+  color: rgba(0, 255, 255, 0.5) !important;
+}
+
+.theme-retro-arcade button[class*="bg-[var(--accent)]"],
+body.theme-retro-arcade button[class*="bg-[var(--accent)]"] {
+  box-shadow: 0 0 15px rgba(255, 45, 149, 0.5), 0 0 30px rgba(255, 45, 149, 0.3);
+}
+
+.theme-retro-arcade h1,
+body.theme-retro-arcade h1 {
+  color: #ff2d95 !important;
+  text-shadow: 0 0 10px rgba(255, 45, 149, 0.8), 0 0 20px rgba(255, 45, 149, 0.5), 0 0 30px rgba(255, 45, 149, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* RETRO NEON Theme - Magenta/cyan glow */
+.theme-retro-neon .rounded-xl,
+body.theme-retro-neon .rounded-xl {
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.theme-retro-neon input,
+body.theme-retro-neon input {
+  background: rgba(13, 13, 26, 0.8) !important;
+  border-color: #00ffff !important;
+  color: #00ffff !important;
+}
+
+.theme-retro-neon input:focus,
+body.theme-retro-neon input:focus {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3) !important;
+}
+
+.theme-retro-neon input::placeholder,
+body.theme-retro-neon input::placeholder {
+  color: rgba(0, 255, 255, 0.5) !important;
+}
+
+.theme-retro-neon button[class*="bg-[var(--accent)]"],
+body.theme-retro-neon button[class*="bg-[var(--accent)]"] {
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.3);
+}
+
+.theme-retro-neon h1,
+body.theme-retro-neon h1 {
+  color: #ff00ff !important;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.3);
+}
+
+/* MODERN Theme - Subtle cyan glow with glass effect */
+.theme-modern .rounded-xl,
+body.theme-modern .rounded-xl {
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-modern input,
+body.theme-modern input {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-modern input:focus,
+body.theme-modern input:focus {
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), 0 0 20px rgba(6, 182, 212, 0.2) !important;
+  border-color: #06b6d4 !important;
+}
+
+.theme-modern input::placeholder,
+body.theme-modern input::placeholder {
+  color: rgba(148, 163, 184, 0.7) !important;
+}
+
+.theme-modern button[class*="bg-[var(--accent)]"],
+body.theme-modern button[class*="bg-[var(--accent)]"] {
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4), 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.theme-modern h1,
+body.theme-modern h1 {
+  color: #06b6d4 !important;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+}
