@@ -684,14 +684,14 @@ export default function GamePage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[var(--foreground)]">Bank Dice</h1>
+            <h1 className="text-xl font-bold" style={{ color: "var(--accent)", textShadow: "0 0 10px var(--accent), 0 0 20px var(--accent)" }}>Bank Dice</h1>
             <p className="text-sm text-[var(--muted-foreground)]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
           <div className="text-right">
             <p className="text-xs text-[var(--muted-foreground)] opacity-70">Shareable Game Code</p>
-            <p className="font-mono text-lg font-bold tracking-wider">
+            <p className="font-mono text-lg font-bold tracking-wider" style={{ color: "var(--accent)", textShadow: "0 0 8px var(--accent)" }}>
               {state.game.joinCode}
             </p>
           </div>

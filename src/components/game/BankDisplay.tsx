@@ -19,15 +19,32 @@ export function BankDisplay({
 
   return (
     <motion.div
-      className={"rounded-xl p-6 text-center border-2 " + (inDangerZone ? "bg-blue-50 border-blue-300" : "bg-yellow-50 border-yellow-300")}
+      className="bank-display rounded-xl p-6 text-center border-2"
+      style={{
+        background: inDangerZone ? 'var(--danger-zone-bg)' : 'var(--safe-zone-bg)',
+        borderColor: inDangerZone ? 'var(--danger-zone-border)' : 'var(--safe-zone-border)',
+        boxShadow: inDangerZone 
+          ? '0 0 15px var(--danger-zone-border), inset 0 0 30px rgba(0,0,0,0.3)' 
+          : '0 0 15px var(--safe-zone-border), inset 0 0 30px rgba(0,0,0,0.3)',
+      }}
       animate={bankTotal === 0 ? { x: [-5, 5, -5, 5, 0] } : {}}
       transition={{ duration: 0.4 }}
     >
-      <div className={"text-sm font-medium uppercase tracking-wide " + (inDangerZone ? "text-blue-600" : "text-yellow-600")}>
+      <div 
+        className="text-sm font-medium uppercase tracking-wide"
+        style={{ 
+          color: inDangerZone ? 'var(--danger-zone-border)' : 'var(--safe-zone-border)',
+          textShadow: '0 0 10px currentColor',
+        }}
+      >
         {inDangerZone ? "Live Game" : "Safe Zone"}
       </div>
       <motion.div
-        className="my-2 text-6xl font-bold text-[var(--foreground)]"
+        className="bank-total my-2 text-6xl font-bold"
+        style={{ 
+          color: 'var(--foreground)',
+          textShadow: '0 0 20px var(--accent), 0 0 40px var(--accent)',
+        }}
         key={bankTotal}
         initial={{ scale: 1.2 }}
         animate={{ scale: 1 }}
@@ -37,7 +54,12 @@ export function BankDisplay({
       </motion.div>
       {lastResultMessage && (
         <motion.div
-          className={"mt-3 rounded-md px-3 py-2 text-sm " + (inDangerZone ? "bg-blue-100 text-blue-700" : "bg-yellow-100 text-yellow-700")}
+          className="mt-3 rounded-md px-3 py-2 text-sm font-medium"
+          style={{
+            background: inDangerZone ? 'var(--danger-zone-bg)' : 'var(--safe-zone-bg)',
+            color: inDangerZone ? 'var(--danger-zone-border)' : 'var(--safe-zone-border)',
+            border: '1px solid currentColor',
+          }}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >

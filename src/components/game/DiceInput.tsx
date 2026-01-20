@@ -84,11 +84,22 @@ export function DiceInput({
             disabled={disabled || inSafeZone}
             size="lg"
             className="w-full"
+            style={!inSafeZone && !disabled ? {
+              borderColor: 'var(--double-border)',
+              color: 'var(--double-border)',
+            } : {}}
           >
             Doubles
           </Button>
           {showDoublesMenu && !inSafeZone && (
-            <div className="absolute top-full right-0 mt-1 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-md shadow-lg z-10 p-2 flex gap-1">
+            <div 
+              className="absolute top-full right-0 mt-1 rounded-md shadow-lg z-10 p-2 flex gap-1"
+              style={{
+                background: 'var(--card-bg)',
+                border: '2px solid var(--double-border)',
+                boxShadow: '0 0 15px var(--double-border)',
+              }}
+            >
               {[1, 2, 3, 4, 5, 6].map((val) => (
                 <Button
                   key={val}
@@ -96,6 +107,11 @@ export function DiceInput({
                   size="sm"
                   onClick={() => handleDouble(val)}
                   className="w-10 h-10"
+                  style={{
+                    borderColor: 'var(--double-border)',
+                    color: 'var(--double-border)',
+                    background: 'var(--double-bg)',
+                  }}
                 >
                   {val}+{val}
                 </Button>

@@ -14,13 +14,46 @@ interface RollHistoryProps {
   safeZoneRolls?: number;
 }
 
-const resultColors: Record<string, string> = {
-  normal: "bg-[var(--muted)] text-[var(--foreground)]",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+// Theme-aware result colors using CSS variables
+const getResultStyle = (colorKey: string): React.CSSProperties => {
+  switch (colorKey) {
+    case 'double':
+      return {
+        background: 'var(--double-bg)',
+        color: 'var(--double-border)',
+        borderLeft: '3px solid var(--double-border)',
+      };
+    case 'seven':
+      return {
+        background: 'var(--safe-zone-bg)',
+        color: 'var(--safe-zone-border)',
+        borderLeft: '3px solid var(--safe-zone-border)',
+      };
+    case 'bust':
+      return {
+        background: 'var(--bust-bg)',
+        color: 'var(--bust-border)',
+        borderLeft: '3px solid var(--bust-border)',
+      };
+    case 'snakeeyes':
+      return {
+        background: 'var(--snakeeyes-bg, var(--safe-zone-bg))',
+        color: 'var(--snakeeyes-border, var(--banked-color, #22c55e))',
+        borderLeft: '3px solid var(--snakeeyes-border, var(--banked-color, #22c55e))',
+      };
+    case 'lucky11':
+      return {
+        background: 'var(--lucky11-bg, var(--danger-zone-bg))',
+        color: 'var(--lucky11-border, var(--leader-color, #f59e0b))',
+        borderLeft: '3px solid var(--lucky11-border, var(--leader-color, #f59e0b))',
+      };
+    default:
+      return {
+        background: 'var(--muted)',
+        color: 'var(--foreground)',
+        borderLeft: '3px solid var(--card-border)',
+      };
+  }
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -81,7 +114,10 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-[var(--card-border)] p-4 text-center text-sm text-[var(--muted-foreground)]">
+      <div 
+        className="rounded-lg border border-dashed p-4 text-center text-sm"
+        style={{ borderColor: 'var(--card-border)', color: 'var(--muted-foreground)' }}
+      >
         No rolls yet this round
       </div>
     );
@@ -89,18 +125,18 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-[var(--muted-foreground)]">
+      <h3 className="text-sm font-medium" style={{ color: 'var(--muted-foreground)' }}>
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
         {currentRoundRolls.map((roll) => {
           const { label, colorKey } = getDisplayLabel(roll, gameOptions, safeZoneRolls);
+          const style = getResultStyle(colorKey);
           return (
             <div
               key={roll.id}
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${
-                resultColors[colorKey]
-              }`}
+              className="flex items-center gap-3 rounded-md px-3 py-2 text-sm"
+              style={style}
             >
               <span className="font-medium">#{roll.rollNumber}</span>
 

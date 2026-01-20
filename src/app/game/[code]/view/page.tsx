@@ -336,7 +336,7 @@ export default function ViewerPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-[var(--foreground)]">Bank Dice</h1>
+            <h1 className="text-xl font-bold" style={{ color: "var(--accent)", textShadow: "0 0 10px var(--accent), 0 0 20px var(--accent)" }}>Bank Dice</h1>
             <p className="text-sm text-[var(--muted-foreground)]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
