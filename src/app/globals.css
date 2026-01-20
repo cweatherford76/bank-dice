@@ -87,33 +87,38 @@ body.theme-modern {
 .theme-tron {
   --background: #000000;
   --foreground: #e0e0e0;
-  --card-bg: #0a0a0a;
-  --card-border: rgba(0, 212, 255, 0.3);
-  --muted: #141414;
+  --card-bg: rgba(0, 0, 0, 0.9);
+  --card-border: rgba(0, 212, 255, 0.4);
+  --muted: #0a0a0a;
   --muted-foreground: #888888;
   --accent: #00d4ff;
   --accent-foreground: #000000;
   --safe-zone-bg: rgba(0, 212, 255, 0.1);
   --safe-zone-border: #00d4ff;
-  --danger-zone-bg: rgba(255, 102, 0, 0.1);
+  --danger-zone-bg: rgba(255, 102, 0, 0.15);
   --danger-zone-border: #ff6600;
-  --bust-bg: rgba(255, 102, 0, 0.2);
-  --bust-border: #ff6600;
+  --bust-bg: rgba(255, 68, 68, 0.2);
+  --bust-border: #ff4444;
   --double-bg: rgba(168, 85, 247, 0.2);
   --double-border: #a855f7;
   --bank-btn-bg: #00d4ff;
-  --bank-btn-hover: #0a8fb3;
-  --tron-cyan-glow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
-  --tron-orange-glow: 0 0 10px rgba(255, 102, 0, 0.5), 0 0 20px rgba(255, 102, 0, 0.3);
+  --bank-btn-hover: #00b8e6;
+  --banked-color: #00ff88;
+  --leader-color: #ff6600;
+  --score-color: #00d4ff;
+  --tron-cyan-glow: 0 0 8px rgba(0, 212, 255, 0.6), 0 0 16px rgba(0, 212, 255, 0.4), 0 0 24px rgba(0, 212, 255, 0.2);
+  --tron-orange-glow: 0 0 8px rgba(255, 102, 0, 0.6), 0 0 16px rgba(255, 102, 0, 0.4);
+  --tron-green-glow: 0 0 8px rgba(0, 255, 136, 0.6), 0 0 16px rgba(0, 255, 136, 0.4);
+  --tron-red-glow: 0 0 8px rgba(255, 68, 68, 0.6), 0 0 16px rgba(255, 68, 68, 0.4);
 }
 
 .theme-tron body,
 body.theme-tron {
   background: #000000;
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* ===== RETRO ARCADE THEME (Neon Pink/Cyan/Green/Yellow) ===== */
