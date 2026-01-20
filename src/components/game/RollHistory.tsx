@@ -56,24 +56,30 @@ const getResultStyle = (colorKey: string): React.CSSProperties => {
   }
 };
 
-function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
+function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string; hideSum: boolean } {
   const sum = roll.die1 + roll.die2;
+  const isDouble = roll.die1 === roll.die2;
   const isSnakeEyes = roll.die1 === 1 && roll.die2 === 1;
   const isLucky11 = sum === 11;
   const inSafeZone = roll.rollNumber <= safeZoneRolls;
 
   // Snake Eyes takes priority if option enabled and in danger zone
   if (isSnakeEyes && gameOptions?.snakeEyesBonus && !inSafeZone) {
-    return { label: "Snake Eyes!", colorKey: "snakeeyes" };
+    return { label: "Snake Eyes!", colorKey: "snakeeyes", hideSum: false };
   }
 
   // Lucky 11 if option enabled
   if (isLucky11 && gameOptions?.lucky11) {
-    return { label: "Lucky 11!", colorKey: "lucky11" };
+    return { label: "Lucky 11!", colorKey: "lucky11", hideSum: false };
+  }
+
+  // For doubles, hide the sum (just show "double")
+  if (isDouble && roll.resultType === "double") {
+    return { label: "Double", colorKey: "double", hideSum: true };
   }
 
   // Default to the result type
-  return { label: roll.resultType, colorKey: roll.resultType };
+  return { label: roll.resultType, colorKey: roll.resultType, hideSum: false };
 }
 
 export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOptions, safeZoneRolls = 3 }: RollHistoryProps) {
@@ -130,7 +136,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
         {currentRoundRolls.map((roll) => {
-          const { label, colorKey } = getDisplayLabel(roll, gameOptions, safeZoneRolls);
+          const { label, colorKey, hideSum } = getDisplayLabel(roll, gameOptions, safeZoneRolls);
           const style = getResultStyle(colorKey);
           return (
             <div
@@ -170,8 +176,8 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                 </>
               ) : (
                 <>
-                  <span className="font-bold">{roll.die1 + roll.die2}</span>
-                  <span className="text-xs uppercase tracking-wide">
+                  {!hideSum && <span className="font-bold">{roll.die1 + roll.die2}</span>}
+                  <span className="text-xs uppercase tracking-wide font-semibold">
                     {label}
                   </span>
                   <span className="ml-auto font-medium">→ {roll.bankAfter}</span>
