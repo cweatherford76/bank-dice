@@ -256,8 +256,8 @@ export default function ViewerPage() {
   // Loading state
   if (state.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
-        <div className="text-zinc-500">Loading game...</div>
+      <div className="flex min-h-screen items-center justify-center bg-black tron-grid">
+        <div className="text-[#00d4ff] [text-shadow:0_0_10px_rgba(0,212,255,0.5)]">Loading game...</div>
       </div>
     );
   }
@@ -265,10 +265,10 @@ export default function ViewerPage() {
   // Error state
   if (state.error || !state.game) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
+      <div className="flex min-h-screen items-center justify-center bg-black tron-grid">
         <Card className="w-80">
           <CardContent className="pt-6 text-center">
-            <p className="text-red-500">{state.error || "Game not found"}</p>
+            <p className="text-[#ff4444]">{state.error || "Game not found"}</p>
             <Button onClick={() => router.push("/")} className="mt-4">
               Back to Home
             </Button>
@@ -285,11 +285,11 @@ export default function ViewerPage() {
     )[0];
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+      <div className="min-h-screen bg-black tron-grid p-4">
         <div className="mx-auto max-w-md space-y-6 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-zinc-900">Game Over!</h1>
-            <p className="mt-2 text-xl text-zinc-600">
+            <h1 className="text-4xl font-bold text-[#00d4ff] [text-shadow:0_0_20px_rgba(0,212,255,0.8)]">Game Over!</h1>
+            <p className="mt-2 text-xl text-[#ff6600] [text-shadow:0_0_10px_rgba(255,102,0,0.5)]">
               Winner: {winner.name} with {winner.totalScore.toLocaleString()}{" "}
               points!
             </p>
@@ -319,17 +319,17 @@ export default function ViewerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen bg-black tron-grid p-4">
       <div className="mx-auto max-w-lg space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-zinc-900">Bank Dice</h1>
-            <p className="text-sm text-zinc-500">
+            <h1 className="text-xl font-bold text-[#00d4ff] [text-shadow:0_0_10px_rgba(0,212,255,0.5)]">Bank Dice</h1>
+            <p className="text-sm text-[#888888]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
-          <div className="rounded-full bg-zinc-200 px-3 py-1 text-xs text-zinc-600">
+          <div className="rounded-full bg-[#1f1f1f] border border-[#00d4ff]/30 px-3 py-1 text-xs text-[#00d4ff]">
             Viewing
           </div>
         </div>

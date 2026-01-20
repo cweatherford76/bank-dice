@@ -15,21 +15,21 @@ interface RollHistoryProps {
 }
 
 const diceFaces: Record<number, string> = {
-  1: "⚀",
-  2: "⚁",
-  3: "⚂",
-  4: "⚃",
-  5: "⚄",
-  6: "⚅",
+  1: "\u2680",
+  2: "\u2681",
+  3: "\u2682",
+  4: "\u2683",
+  5: "\u2684",
+  6: "\u2685",
 };
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+  normal: "bg-[#1f1f1f] text-[#888888] border-[#2a2a2a]",
+  double: "bg-[#a855f7]/20 text-[#a855f7] border-[#a855f7]/30 shadow-[0_0_10px_rgba(168,85,247,0.2)]",
+  seven: "bg-[#00d4ff]/20 text-[#00d4ff] border-[#00d4ff]/30 shadow-[0_0_10px_rgba(0,212,255,0.2)]",
+  bust: "bg-[#ff4444]/20 text-[#ff4444] border-[#ff4444]/30 shadow-[0_0_10px_rgba(255,68,68,0.3)]",
+  snakeeyes: "bg-[#00ff88]/20 text-[#00ff88] border-[#00ff88]/30 shadow-[0_0_10px_rgba(0,255,136,0.2)]",
+  lucky11: "bg-[#ff6600]/20 text-[#ff6600] border-[#ff6600]/30 shadow-[0_0_10px_rgba(255,102,0,0.2)]",
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -90,7 +90,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-lg border border-dashed border-[#2a2a2a] p-4 text-center text-sm text-[#555555]">
         No rolls yet this round
       </div>
     );
@@ -98,7 +98,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-medium text-[#888888] uppercase tracking-wide">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
@@ -107,11 +107,11 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
           return (
             <div
               key={roll.id}
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${
+              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm border ${
                 resultColors[colorKey]
               }`}
             >
-              <span className="font-medium">#{roll.rollNumber}</span>
+              <span className="font-medium text-[#00d4ff]">#{roll.rollNumber}</span>
 
               {editingRollId === roll.id ? (
                 <>
@@ -146,12 +146,12 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                   <span className="text-lg">
                     {diceFaces[roll.die1]} {diceFaces[roll.die2]}
                   </span>
-                  <span>=</span>
+                  <span className="text-[#555555]">=</span>
                   <span className="font-bold">{roll.die1 + roll.die2}</span>
                   <span className="ml-auto text-xs uppercase tracking-wide">
                     {label}
                   </span>
-                  <span className="font-medium">→ {roll.bankAfter}</span>
+                  <span className="font-medium text-[#00d4ff]">{roll.bankAfter}</span>
                   {isBanker && onEditRoll && (
                     <Button
                       size="sm"

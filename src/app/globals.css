@@ -1,8 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* TRON Color Palette */
+  --background: #000000;
+  --foreground: #e0e0e0;
+
+  /* Primary cyan glow */
+  --tron-cyan: #00d4ff;
+  --tron-cyan-dim: #0a8fb3;
+  --tron-cyan-glow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+  --tron-cyan-glow-subtle: 0 0 5px rgba(0, 212, 255, 0.3), 0 0 10px rgba(0, 212, 255, 0.2);
+
+  /* Secondary orange (enemy/danger) */
+  --tron-orange: #ff6600;
+  --tron-orange-dim: #b34700;
+  --tron-orange-glow: 0 0 10px rgba(255, 102, 0, 0.5), 0 0 20px rgba(255, 102, 0, 0.3);
+
+  /* Success green */
+  --tron-green: #00ff88;
+  --tron-green-glow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3);
+
+  /* Purple for doubles */
+  --tron-purple: #a855f7;
+  --tron-purple-glow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3);
+
+  /* Dark surfaces */
+  --surface-dark: #0a0a0a;
+  --surface-medium: #141414;
+  --surface-light: #1f1f1f;
+  --border-color: #2a2a2a;
+  --border-glow: #00d4ff;
 }
 
 @theme inline {
@@ -12,15 +39,67 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* TRON grid background pattern */
+.tron-grid {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glowing text effect */
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.text-glow-orange {
+  text-shadow: 0 0 10px rgba(255, 102, 0, 0.8), 0 0 20px rgba(255, 102, 0, 0.5);
+}
+
+/* Glowing borders */
+.border-glow-cyan {
+  box-shadow: 0 0 5px rgba(0, 212, 255, 0.5), 0 0 10px rgba(0, 212, 255, 0.3), inset 0 0 5px rgba(0, 212, 255, 0.1);
+}
+
+.border-glow-orange {
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.5), 0 0 10px rgba(255, 102, 0, 0.3), inset 0 0 5px rgba(255, 102, 0, 0.1);
+}
+
+/* Animated pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.5), 0 0 10px rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar for TRON theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tron-cyan-dim);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tron-cyan);
 }

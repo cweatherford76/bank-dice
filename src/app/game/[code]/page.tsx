@@ -599,8 +599,8 @@ export default function GamePage() {
   // Loading state
   if (state.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
-        <div className="text-zinc-500">Loading game...</div>
+      <div className="flex min-h-screen items-center justify-center bg-black tron-grid">
+        <div className="text-[#00d4ff] [text-shadow:0_0_10px_rgba(0,212,255,0.5)]">Loading game...</div>
       </div>
     );
   }
@@ -608,10 +608,10 @@ export default function GamePage() {
   // Error state
   if (state.error || !state.game) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
+      <div className="flex min-h-screen items-center justify-center bg-black tron-grid">
         <Card className="w-80">
           <CardContent className="pt-6 text-center">
-            <p className="text-red-500">{state.error || "Game not found"}</p>
+            <p className="text-[#ff4444]">{state.error || "Game not found"}</p>
             <Button onClick={() => router.push("/")} className="mt-4">
               Back to Home
             </Button>
@@ -628,11 +628,11 @@ export default function GamePage() {
     )[0];
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+      <div className="min-h-screen bg-black tron-grid p-4">
         <div className="mx-auto max-w-md space-y-6 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-zinc-900">Game Over!</h1>
-            <p className="mt-2 text-xl text-zinc-600">
+            <h1 className="text-4xl font-bold text-[#00d4ff] [text-shadow:0_0_20px_rgba(0,212,255,0.8)]">Game Over!</h1>
+            <p className="mt-2 text-xl text-[#ff6600] [text-shadow:0_0_10px_rgba(255,102,0,0.5)]">
               Winner: {winner.name} with {winner.totalScore.toLocaleString()}{" "}
               points!
             </p>
@@ -667,19 +667,19 @@ export default function GamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen bg-black tron-grid p-4">
       <div className="mx-auto max-w-lg space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-zinc-900">Bank Dice</h1>
-            <p className="text-sm text-zinc-500">
+            <h1 className="text-xl font-bold text-[#00d4ff] [text-shadow:0_0_10px_rgba(0,212,255,0.5)]">Bank Dice</h1>
+            <p className="text-sm text-[#888888]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-zinc-400">Shareable Game Code</p>
-            <p className="font-mono text-lg font-bold tracking-wider">
+            <p className="text-xs text-[#555555]">Shareable Game Code</p>
+            <p className="font-mono text-lg font-bold tracking-wider text-[#00d4ff]">
               {state.game.joinCode}
             </p>
           </div>
@@ -745,8 +745,8 @@ export default function GamePage() {
 
       {/* End Dialog Overlay */}
       {showEndDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-sm">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+          <Card className="w-full max-w-sm border-[#00d4ff]/50 shadow-[0_0_30px_rgba(0,212,255,0.3)]">
             <CardHeader>
               <CardTitle>Game Options</CardTitle>
               <CardDescription>

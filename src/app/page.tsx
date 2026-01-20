@@ -28,16 +28,18 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-black tron-grid p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo/Title */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-zinc-900">Bank Dice</h1>
-          <p className="mt-2 text-zinc-600">The press-your-luck dice game</p>
+          <h1 className="text-5xl font-bold text-[#00d4ff] [text-shadow:0_0_20px_rgba(0,212,255,0.8),0_0_40px_rgba(0,212,255,0.5),0_0_60px_rgba(0,212,255,0.3)] tracking-wider">
+            BANK DICE
+          </h1>
+          <p className="mt-3 text-[#888888] tracking-wide">The press-your-luck dice game</p>
         </div>
 
         {/* Create Game Card */}
-        <Card>
+        <Card className="border-[#00d4ff]/30 hover:border-[#00d4ff]/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.2)]">
           <CardHeader>
             <CardTitle>Start a New Game</CardTitle>
             <CardDescription>
@@ -52,7 +54,7 @@ export default function Home() {
         </Card>
 
         {/* Join Game Card */}
-        <Card>
+        <Card className="border-[#00d4ff]/30 hover:border-[#00d4ff]/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.2)]">
           <CardHeader>
             <CardTitle>Watch a Game</CardTitle>
             <CardDescription>
@@ -61,7 +63,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="joinCode">Game Code</Label>
+              <Label htmlFor="joinCode" className="text-[#888888]">Game Code</Label>
               <Input
                 id="joinCode"
                 placeholder="Enter 8-character code"
@@ -71,9 +73,9 @@ export default function Home() {
                   setError("");
                 }}
                 maxLength={8}
-                className="text-center text-lg tracking-widest"
+                className="text-center text-lg tracking-widest text-[#00d4ff]"
               />
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && <p className="text-sm text-[#ff4444]">{error}</p>}
             </div>
             <Button
               onClick={handleJoinGame}
@@ -87,8 +89,8 @@ export default function Home() {
         </Card>
 
         {/* Footer */}
-        <p className="text-center text-sm text-zinc-500">
-          A family game tracker for the classic "Bank" dice game
+        <p className="text-center text-sm text-[#555555]">
+          A family game tracker for the classic &quot;Bank&quot; dice game
         </p>
       </div>
     </div>

@@ -62,7 +62,7 @@ export function DiceInput({
           onChange={(e) => setTotal(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="2-12"
-          className="w-24 text-center text-2xl h-14"
+          className="w-24 text-center text-2xl h-14 text-[#00d4ff] font-bold"
           disabled={disabled}
         />
       </div>
@@ -88,14 +88,14 @@ export function DiceInput({
             Doubles
           </Button>
           {showDoublesMenu && !inSafeZone && (
-            <div className="absolute top-full right-0 mt-1 bg-white border rounded-md shadow-lg z-10 p-2 flex gap-1">
+            <div className="absolute top-full right-0 mt-1 bg-[#0a0a0a] border border-[#2a2a2a] rounded-md shadow-[0_0_20px_rgba(0,0,0,0.8)] z-10 p-2 flex gap-1">
               {[1, 2, 3, 4, 5, 6].map((val) => (
                 <Button
                   key={val}
                   variant="outline"
                   size="sm"
                   onClick={() => handleDouble(val)}
-                  className="w-10 h-10"
+                  className="w-10 h-10 text-[#a855f7] border-[#a855f7]/50 hover:bg-[#a855f7]/20 hover:shadow-[0_0_10px_rgba(168,85,247,0.5)]"
                 >
                   {val}+{val}
                 </Button>
