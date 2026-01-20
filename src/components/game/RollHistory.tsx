@@ -85,12 +85,16 @@ function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: n
   }
 
   // For doubles in DANGER ZONE only - show "Doubles! Bank x2"
-  // In safe zone, doubles just add face value like normal rolls
   if (isDouble && roll.resultType === "double" && !inSafeZone) {
     return { label: "Doubles! Bank x2", colorKey: "double", hideSum: true, isRoundDoubled: false };
   }
 
-  // Default to the result type (normal, or doubles in safe zone shown as normal)
+  // Doubles in SAFE ZONE should display as normal rolls (no special effect)
+  if (isDouble && inSafeZone) {
+    return { label: "normal", colorKey: "normal", hideSum: false, isRoundDoubled: false };
+  }
+
+  // Default to the result type
   return { label: roll.resultType, colorKey: roll.resultType, hideSum: false, isRoundDoubled: false };
 }
 
@@ -132,7 +136,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div 
+      <div
         className="rounded-lg border border-dashed p-4 text-center text-sm"
         style={{ borderColor: 'var(--card-border)', color: 'var(--muted-foreground)' }}
       >
