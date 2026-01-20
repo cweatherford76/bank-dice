@@ -16,7 +16,6 @@ export function DiceInput({
   inSafeZone = true,
 }: DiceInputProps) {
   const [total, setTotal] = useState<string>("");
-  const [showDoublesMenu, setShowDoublesMenu] = useState(false);
 
   const handleSubmit = () => {
     const num = parseInt(total);
@@ -35,9 +34,11 @@ export function DiceInput({
     }
   };
 
-  const handleDouble = (value: number) => {
-    onRoll(value, value);
-    setShowDoublesMenu(false);
+  const handleDoubles = () => {
+    // Record a generic doubles roll (3+3 = 6, middle value)
+    // The game engine will detect it as doubles and apply the multiplier
+    onRoll(3, 3);
+    setTotal("");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -77,48 +78,19 @@ export function DiceInput({
           Record Roll
         </Button>
 
-        <div className="relative flex-1">
-          <Button
-            variant="outline"
-            onClick={() => setShowDoublesMenu(!showDoublesMenu)}
-            disabled={disabled || inSafeZone}
-            size="lg"
-            className="w-full"
-            style={!inSafeZone && !disabled ? {
-              borderColor: 'var(--double-border)',
-              color: 'var(--double-border)',
-            } : {}}
-          >
-            Doubles
-          </Button>
-          {showDoublesMenu && !inSafeZone && (
-            <div 
-              className="absolute top-full right-0 mt-1 rounded-md shadow-lg z-10 p-2 flex gap-1"
-              style={{
-                background: 'var(--card-bg)',
-                border: '2px solid var(--double-border)',
-                boxShadow: '0 0 15px var(--double-border)',
-              }}
-            >
-              {[1, 2, 3, 4, 5, 6].map((val) => (
-                <Button
-                  key={val}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleDouble(val)}
-                  className="w-10 h-10"
-                  style={{
-                    borderColor: 'var(--double-border)',
-                    color: 'var(--double-border)',
-                    background: 'var(--double-bg)',
-                  }}
-                >
-                  {val}+{val}
-                </Button>
-              ))}
-            </div>
-          )}
-        </div>
+        <Button
+          variant="outline"
+          onClick={handleDoubles}
+          disabled={disabled || inSafeZone}
+          size="lg"
+          className="flex-1"
+          style={!inSafeZone && !disabled ? {
+            borderColor: 'var(--double-border)',
+            color: 'var(--double-border)',
+          } : {}}
+        >
+          Doubles
+        </Button>
       </div>
     </div>
   );
