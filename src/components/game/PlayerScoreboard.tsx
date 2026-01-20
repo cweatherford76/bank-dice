@@ -28,7 +28,7 @@ export function PlayerScoreboard({
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">Player Scores</h3>
+      <h3 className="text-sm font-medium text-neon-cyan">Player Scores</h3>
       <div className="space-y-2">
         {sortedPlayers.map((player, index) => {
           const canBank = !player.hasBanked && canBankAtAll;
@@ -40,10 +40,10 @@ export function PlayerScoreboard({
               key={player.id}
               className={`flex items-center gap-3 rounded-lg border-2 p-3 ${
                 isCurrentPlayer
-                  ? "border-green-500 bg-green-50"
+                  ? "border-neon-green bg-neon-green/10 shadow-lg shadow-neon-green/20"
                   : player.hasBanked
-                  ? "border-green-200 bg-green-50"
-                  : "border-zinc-200 bg-white"
+                  ? "border-neon-green/50 bg-neon-green/5"
+                  : "border-retro-border bg-retro-card"
               }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -53,8 +53,8 @@ export function PlayerScoreboard({
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
                   isLeading
-                    ? "bg-yellow-400 text-yellow-900"
-                    : "bg-zinc-100 text-zinc-600"
+                    ? "bg-neon-yellow text-retro-dark shadow-lg shadow-neon-yellow/50"
+                    : "bg-retro-border text-neon-cyan"
                 }`}
               >
                 {index + 1}
@@ -64,7 +64,7 @@ export function PlayerScoreboard({
               <div className="flex-1">
                 <div className="font-medium">{player.name}</div>
                 {player.hasBanked && player.currentRoundBanked !== null && (
-                  <div className="text-xs text-green-600">
+                  <div className="text-xs text-neon-green">
                     Banked +{player.currentRoundBanked.toLocaleString()}
                   </div>
                 )}
@@ -84,7 +84,7 @@ export function PlayerScoreboard({
                   size="sm"
                   onClick={() => onBank(player.id)}
                   disabled={!canBank}
-                  className={player.hasBanked ? "text-green-600" : ""}
+                  className={player.hasBanked ? "text-neon-green" : ""}
                 >
                   {player.hasBanked ? "✓ Banked" : "Bank"}
                 </Button>

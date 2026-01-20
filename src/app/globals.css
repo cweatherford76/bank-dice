@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0d1a;
+  --foreground: #e0e0ff;
+  --neon-cyan: #00ffff;
+  --neon-magenta: #ff00ff;
+  --neon-green: #39ff14;
+  --neon-yellow: #ffff00;
+  --neon-orange: #ff6b35;
+  --neon-pink: #ff69b4;
+  --retro-purple: #1a0a2e;
+  --retro-dark: #0d0d1a;
+  --retro-card: #1a1a2e;
+  --retro-border: #2a2a4e;
 }
 
 @theme inline {
@@ -10,17 +20,21 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-green: var(--neon-green);
+  --color-neon-yellow: var(--neon-yellow);
+  --color-neon-orange: var(--neon-orange);
+  --color-neon-pink: var(--neon-pink);
+  --color-retro-purple: var(--retro-purple);
+  --color-retro-dark: var(--retro-dark);
+  --color-retro-card: var(--retro-card);
+  --color-retro-border: var(--retro-border);
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, var(--retro-dark) 0%, var(--retro-purple) 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }

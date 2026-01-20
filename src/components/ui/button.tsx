@@ -9,16 +9,16 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "default", ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50";
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan disabled:pointer-events-none disabled:opacity-50";
 
     const variants = {
-      default: "bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90",
-      destructive: "bg-red-500 text-zinc-50 shadow-sm hover:bg-red-500/90",
+      default: "bg-neon-magenta text-white shadow-lg shadow-neon-magenta/30 hover:bg-neon-magenta/80 hover:shadow-neon-magenta/50",
+      destructive: "bg-neon-orange text-white shadow-lg shadow-neon-orange/30 hover:bg-neon-orange/80",
       outline:
-        "border border-zinc-200 bg-white shadow-sm hover:bg-zinc-100 hover:text-zinc-900",
-      secondary: "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-100/80",
-      ghost: "hover:bg-zinc-100 hover:text-zinc-900",
-      link: "text-zinc-900 underline-offset-4 hover:underline",
+        "border-2 border-neon-cyan bg-transparent text-neon-cyan shadow-sm hover:bg-neon-cyan/10 hover:shadow-neon-cyan/30",
+      secondary: "bg-retro-card text-neon-cyan border border-retro-border shadow-sm hover:bg-retro-border/50",
+      ghost: "hover:bg-retro-card hover:text-neon-cyan",
+      link: "text-neon-cyan underline-offset-4 hover:underline",
     };
 
     const sizes = {

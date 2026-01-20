@@ -24,12 +24,12 @@ const diceFaces: Record<number, string> = {
 };
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+  normal: "bg-retro-card border border-retro-border text-foreground",
+  double: "bg-neon-magenta/20 border border-neon-magenta/50 text-neon-magenta",
+  seven: "bg-neon-cyan/20 border border-neon-cyan/50 text-neon-cyan",
+  bust: "bg-neon-orange/20 border border-neon-orange/50 text-neon-orange",
+  snakeeyes: "bg-neon-green/20 border border-neon-green/50 text-neon-green",
+  lucky11: "bg-neon-yellow/20 border border-neon-yellow/50 text-neon-yellow",
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -90,7 +90,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-lg border border-dashed border-retro-border p-4 text-center text-sm text-neon-cyan/50">
         No rolls yet this round
       </div>
     );
@@ -98,7 +98,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-medium text-neon-cyan">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">

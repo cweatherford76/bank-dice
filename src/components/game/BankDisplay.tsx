@@ -19,15 +19,15 @@ export function BankDisplay({
 
   return (
     <motion.div
-      className={"rounded-xl p-6 text-center border-2 " + (inDangerZone ? "bg-blue-50 border-blue-300" : "bg-yellow-50 border-yellow-300")}
+      className={"rounded-xl p-6 text-center border-2 " + (inDangerZone ? "bg-neon-orange/10 border-neon-orange shadow-lg shadow-neon-orange/30" : "bg-neon-green/10 border-neon-green shadow-lg shadow-neon-green/30")}
       animate={bankTotal === 0 ? { x: [-5, 5, -5, 5, 0] } : {}}
       transition={{ duration: 0.4 }}
     >
-      <div className={"text-sm font-medium uppercase tracking-wide " + (inDangerZone ? "text-blue-600" : "text-yellow-600")}>
-        {inDangerZone ? "Live Game" : "Safe Zone"}
+      <div className={"text-sm font-medium uppercase tracking-wide " + (inDangerZone ? "text-neon-orange" : "text-neon-green")}>
+        {inDangerZone ? "Danger Zone" : "Safe Zone"}
       </div>
       <motion.div
-        className="my-2 text-6xl font-bold text-zinc-900"
+        className={"my-2 text-6xl font-bold " + (inDangerZone ? "text-neon-orange" : "text-neon-green")}
         key={bankTotal}
         initial={{ scale: 1.2 }}
         animate={{ scale: 1 }}
@@ -37,7 +37,7 @@ export function BankDisplay({
       </motion.div>
       {lastResultMessage && (
         <motion.div
-          className={"mt-3 rounded-md px-3 py-2 text-sm " + (inDangerZone ? "bg-blue-100 text-blue-700" : "bg-yellow-100 text-yellow-700")}
+          className={"mt-3 rounded-md px-3 py-2 text-sm " + (inDangerZone ? "bg-neon-orange/20 text-neon-orange border border-neon-orange/50" : "bg-neon-green/20 text-neon-green border border-neon-green/50")}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >

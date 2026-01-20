@@ -28,12 +28,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo/Title */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-zinc-900">Bank Dice</h1>
-          <p className="mt-2 text-zinc-600">The press-your-luck dice game</p>
+          <h1 className="text-4xl font-bold text-neon-magenta drop-shadow-[0_0_10px_rgba(255,0,255,0.5)]">Bank Dice</h1>
+          <p className="mt-2 text-neon-cyan/80">The press-your-luck dice game</p>
         </div>
 
         {/* Create Game Card */}
@@ -87,7 +87,7 @@ export default function Home() {
         </Card>
 
         {/* Footer */}
-        <p className="text-center text-sm text-zinc-500">
+        <p className="text-center text-sm text-neon-cyan/50">
           A family game tracker for the classic "Bank" dice game
         </p>
       </div>

@@ -211,12 +211,12 @@ export default function CreateGame() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen p-4">
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-zinc-900">Create Game</h1>
-          <p className="mt-2 text-zinc-600">Set up players and game options</p>
+          <h1 className="text-3xl font-bold text-neon-magenta drop-shadow-[0_0_10px_rgba(255,0,255,0.5)]">Create Game</h1>
+          <p className="mt-2 text-neon-cyan/80">Set up players and game options</p>
         </div>
 
         {/* Players Card */}
@@ -231,7 +231,7 @@ export default function CreateGame() {
           <CardContent className="space-y-3">
             {playerNames.map((name, index) => (
               <div key={index} className="flex gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-zinc-100 text-sm font-medium">
+                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-retro-border text-neon-cyan text-sm font-medium">
                   {index + 1}
                 </div>
                 <Input
@@ -245,7 +245,7 @@ export default function CreateGame() {
                     variant="ghost"
                     size="icon"
                     onClick={() => removePlayer(index)}
-                    className="text-zinc-400 hover:text-red-500"
+                    className="text-neon-cyan/50 hover:text-neon-orange"
                   >
                     ✕
                   </Button>
@@ -266,13 +266,13 @@ export default function CreateGame() {
             onClick={() => setOptionsExpanded(!optionsExpanded)}
             className="w-full text-left"
           >
-            <CardHeader className="cursor-pointer hover:bg-zinc-50 transition-colors rounded-t-xl">
+            <CardHeader className="cursor-pointer hover:bg-retro-border/30 transition-colors rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     Game Options
                     {changedOptionsCount > 0 && (
-                      <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white">
+                      <span className="rounded-full bg-neon-magenta px-2 py-0.5 text-xs text-white shadow-lg shadow-neon-magenta/30">
                         {changedOptionsCount} changed
                       </span>
                     )}
@@ -286,7 +286,7 @@ export default function CreateGame() {
                 <motion.div
                   animate={{ rotate: optionsExpanded ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-zinc-400"
+                  className="text-neon-cyan"
                 >
                   <svg
                     width="24"
@@ -320,20 +320,20 @@ export default function CreateGame() {
                     return (
                       <div
                         key={config.key}
-                        className={`flex items-center justify-between gap-4 border-b border-zinc-100 pb-4 last:border-0 last:pb-0 ${
-                          isChanged ? "bg-zinc-50 -mx-2 px-2 rounded-md" : ""
+                        className={`flex items-center justify-between gap-4 border-b border-retro-border pb-4 last:border-0 last:pb-0 ${
+                          isChanged ? "bg-neon-magenta/10 -mx-2 px-2 rounded-md border-l-2 border-l-neon-magenta" : ""
                         }`}
                       >
                         <div className="space-y-0.5">
-                          <Label className="flex items-center gap-2">
+                          <Label className="flex items-center gap-2 text-foreground">
                             {config.label}
                             {isChanged && (
-                              <span className="text-xs text-zinc-500">
+                              <span className="text-xs text-neon-magenta">
                                 (modified)
                               </span>
                             )}
                           </Label>
-                          <p className="text-sm text-zinc-500">
+                          <p className="text-sm text-neon-cyan/60">
                             {config.description}
                           </p>
                         </div>
@@ -366,7 +366,7 @@ export default function CreateGame() {
                             onChange={(e) =>
                               updateOption(config.key, parseInt(e.target.value))
                             }
-                            className="rounded-md border border-zinc-200 px-3 py-1.5 text-sm"
+                            className="rounded-md border border-retro-border bg-retro-card text-foreground px-3 py-1.5 text-sm focus:border-neon-cyan focus:outline-none"
                           >
                             {config.options?.map((opt) => (
                               <option key={opt.value} value={opt.value}>
@@ -383,7 +383,7 @@ export default function CreateGame() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setOptions(DEFAULT_GAME_OPTIONS)}
-                      className="w-full text-zinc-500"
+                      className="w-full text-neon-cyan/70 hover:text-neon-cyan"
                     >
                       Reset to defaults
                     </Button>
@@ -396,7 +396,7 @@ export default function CreateGame() {
 
         {/* Error Message */}
         {error && (
-          <div className="rounded-md bg-red-50 p-4 text-sm text-red-600">
+          <div className="rounded-md bg-neon-orange/20 border border-neon-orange/50 p-4 text-sm text-neon-orange">
             {error}
           </div>
         )}

@@ -21,8 +21,8 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         aria-checked={checked}
         disabled={disabled}
         onClick={() => onCheckedChange?.(!checked)}
-        className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 ${
-          checked ? "bg-zinc-900" : "bg-zinc-200"
+        className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-retro-dark disabled:cursor-not-allowed disabled:opacity-50 ${
+          checked ? "bg-neon-green shadow-lg shadow-neon-green/50" : "bg-retro-border"
         } ${className}`}
       >
         <span
