@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -14,21 +14,29 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DEFAULT_GAME_OPTIONS, GameOptions } from "@/types/game";
+import { DEFAULT_GAME_OPTIONS, GameOptions, ThemeId } from "@/types/game";
 import { generateJoinCode, generateUUID } from "@/lib/game-engine";
 import { createClient } from "@/lib/supabase/client";
+import { THEMES, getTheme } from "@/lib/themes";
 
 interface GameOptionConfig {
   key: keyof GameOptions;
   label: string;
   description: string;
-  type: "boolean" | "number" | "text-number";
-  options?: { value: number; label: string }[];
+  type: "boolean" | "number" | "text-number" | "theme";
+  options?: { value: number | string; label: string }[];
   min?: number;
   max?: number;
 }
 
 const GAME_OPTIONS_CONFIG: GameOptionConfig[] = [
+  {
+    key: "theme",
+    label: "Theme",
+    description: "Visual style for the game",
+    type: "theme",
+    options: THEMES.map(t => ({ value: t.id, label: t.name })),
+  },
   {
     key: "roundCount",
     label: "Round Count",
@@ -63,13 +71,13 @@ const GAME_OPTIONS_CONFIG: GameOptionConfig[] = [
   {
     key: "snakeEyesBonus",
     label: "Snake Eyes Bonus",
-    description: "Rolling 1+1 quadruples the bank (×4)",
+    description: "Rolling 1+1 quadruples the bank (x4)",
     type: "boolean",
   },
   {
     key: "lucky11",
     label: "Lucky 11",
-    description: "Rolling 11 (5+6) quadruples the bank (×4)",
+    description: "Rolling 11 (5+6) quadruples the bank (x4)",
     type: "boolean",
   },
   {
@@ -100,6 +108,15 @@ export default function CreateGame() {
   const [error, setError] = useState("");
   const [optionsExpanded, setOptionsExpanded] = useState(false);
 
+  // Apply theme preview to body
+  useEffect(() => {
+    const theme = getTheme(options.theme);
+    document.body.className = theme.cssClass;
+    return () => {
+      document.body.className = "";
+    };
+  }, [options.theme]);
+
   const addPlayer = () => {
     if (playerNames.length < 10) {
       setPlayerNames([...playerNames, ""]);
@@ -118,36 +135,33 @@ export default function CreateGame() {
     setPlayerNames(updated);
   };
 
-  const updateOption = (key: keyof GameOptions, value: boolean | number) => {
+  const updateOption = (key: keyof GameOptions, value: boolean | number | string) => {
     setOptions({ ...options, [key]: value });
   };
 
   const handleTextNumberChange = (key: keyof GameOptions, value: string, min: number, max: number) => {
     const num = parseInt(value);
     if (value === "") {
-      // Allow empty for typing
       setOptions({ ...options, [key]: 0 });
     } else if (!isNaN(num)) {
-      // Clamp to min/max
       const clamped = Math.min(max, Math.max(min, num));
       setOptions({ ...options, [key]: clamped });
     }
   };
 
-  // Count how many options are changed from defaults
+  // Count how many options are changed from defaults (excluding theme which is always shown)
   const changedOptionsCount = GAME_OPTIONS_CONFIG.filter((config) => {
+    if (config.key === "theme") return false;
     return options[config.key] !== DEFAULT_GAME_OPTIONS[config.key];
   }).length;
 
   const handleCreateGame = async () => {
-    // Validate players
     const validPlayers = playerNames.filter((name) => name.trim() !== "");
     if (validPlayers.length < 2) {
       setError("At least 2 players are required");
       return;
     }
 
-    // Validate round count
     if (options.roundCount < 1 || options.roundCount > 30) {
       setError("Round count must be between 1 and 30");
       return;
@@ -161,7 +175,6 @@ export default function CreateGame() {
       const joinCode = generateJoinCode();
       const sessionToken = generateUUID();
 
-      // Create the game
       const { data: game, error: gameError } = await supabase
         .from("games")
         .insert({
@@ -179,13 +192,13 @@ export default function CreateGame() {
           opt_bank_delay: options.bankDelay,
           opt_safe_zone_rolls: options.safeZoneRolls,
           opt_double_down: options.doubleDown,
+          opt_theme: options.theme,
         })
         .select()
         .single();
 
       if (gameError) { console.error("Game error:", JSON.stringify(gameError)); throw gameError; }
 
-      // Create players
       const playersData = validPlayers.map((name, index) => ({
         game_id: game.id,
         player_order: index + 1,
@@ -198,10 +211,7 @@ export default function CreateGame() {
 
       if (playersError) { console.error("Players error:", JSON.stringify(playersError)); throw playersError; }
 
-      // Store session token in localStorage
       localStorage.setItem(`bank-dice-session-${joinCode}`, sessionToken);
-
-      // Navigate to game page
       router.push(`/game/${joinCode}`);
     } catch (err) {
       console.error("Error creating game:", err);
@@ -211,16 +221,16 @@ export default function CreateGame() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen p-4" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-zinc-900">Create Game</h1>
-          <p className="mt-2 text-zinc-600">Set up players and game options</p>
+          <h1 className="text-3xl font-bold">Create Game</h1>
+          <p className="mt-2 opacity-70">Set up players and game options</p>
         </div>
 
         {/* Players Card */}
-        <Card>
+        <Card className="themed-card" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
           <CardHeader>
             <CardTitle>Players ({playerNames.length}/10)</CardTitle>
             <CardDescription>
@@ -231,7 +241,7 @@ export default function CreateGame() {
           <CardContent className="space-y-3">
             {playerNames.map((name, index) => (
               <div key={index} className="flex gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-zinc-100 text-sm font-medium">
+                <div className="flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium" style={{ background: 'var(--muted)' }}>
                   {index + 1}
                 </div>
                 <Input
@@ -245,9 +255,9 @@ export default function CreateGame() {
                     variant="ghost"
                     size="icon"
                     onClick={() => removePlayer(index)}
-                    className="text-zinc-400 hover:text-red-500"
+                    className="opacity-50 hover:opacity-100 hover:text-red-500"
                   >
-                    ✕
+                    X
                   </Button>
                 )}
               </div>
@@ -261,18 +271,18 @@ export default function CreateGame() {
         </Card>
 
         {/* Game Options Card - Collapsible */}
-        <Card>
+        <Card className="themed-card" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
           <button
             onClick={() => setOptionsExpanded(!optionsExpanded)}
             className="w-full text-left"
           >
-            <CardHeader className="cursor-pointer hover:bg-zinc-50 transition-colors rounded-t-xl">
+            <CardHeader className="cursor-pointer transition-colors rounded-t-xl" style={{ background: optionsExpanded ? 'var(--muted)' : 'transparent' }}>
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     Game Options
                     {changedOptionsCount > 0 && (
-                      <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white">
+                      <span className="rounded-full px-2 py-0.5 text-xs" style={{ background: 'var(--accent)', color: 'var(--accent-foreground)' }}>
                         {changedOptionsCount} changed
                       </span>
                     )}
@@ -286,7 +296,7 @@ export default function CreateGame() {
                 <motion.div
                   animate={{ rotate: optionsExpanded ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-zinc-400"
+                  className="opacity-50"
                 >
                   <svg
                     width="24"
@@ -316,24 +326,28 @@ export default function CreateGame() {
                 <CardContent className="space-y-4 pt-0">
                   {GAME_OPTIONS_CONFIG.map((config) => {
                     const isChanged =
-                      options[config.key] !== DEFAULT_GAME_OPTIONS[config.key];
+                      config.key !== "theme" && options[config.key] !== DEFAULT_GAME_OPTIONS[config.key];
                     return (
                       <div
                         key={config.key}
-                        className={`flex items-center justify-between gap-4 border-b border-zinc-100 pb-4 last:border-0 last:pb-0 ${
-                          isChanged ? "bg-zinc-50 -mx-2 px-2 rounded-md" : ""
+                        className={`flex items-center justify-between gap-4 border-b pb-4 last:border-0 last:pb-0 ${
+                          isChanged ? "rounded-md -mx-2 px-2" : ""
                         }`}
+                        style={{
+                          borderColor: 'var(--card-border)',
+                          background: isChanged ? 'var(--muted)' : 'transparent'
+                        }}
                       >
                         <div className="space-y-0.5">
                           <Label className="flex items-center gap-2">
                             {config.label}
                             {isChanged && (
-                              <span className="text-xs text-zinc-500">
+                              <span className="text-xs opacity-60">
                                 (modified)
                               </span>
                             )}
                           </Label>
-                          <p className="text-sm text-zinc-500">
+                          <p className="text-sm opacity-60">
                             {config.description}
                           </p>
                         </div>
@@ -360,16 +374,32 @@ export default function CreateGame() {
                             }
                             style={{ width: "60px" }} className="text-center text-sm h-8"
                           />
+                        ) : config.type === "theme" ? (
+                          <select
+                            value={options.theme}
+                            onChange={(e) =>
+                              updateOption("theme", e.target.value as ThemeId)
+                            }
+                            className="rounded-md border px-3 py-1.5 text-sm"
+                            style={{ borderColor: 'var(--card-border)', background: 'var(--muted)', color: 'var(--foreground)' }}
+                          >
+                            {THEMES.map((theme) => (
+                              <option key={theme.id} value={theme.id}>
+                                {theme.name}
+                              </option>
+                            ))}
+                          </select>
                         ) : (
                           <select
                             value={options[config.key] as number}
                             onChange={(e) =>
                               updateOption(config.key, parseInt(e.target.value))
                             }
-                            className="rounded-md border border-zinc-200 px-3 py-1.5 text-sm"
+                            className="rounded-md border px-3 py-1.5 text-sm"
+                            style={{ borderColor: 'var(--card-border)', background: 'var(--muted)', color: 'var(--foreground)' }}
                           >
                             {config.options?.map((opt) => (
-                              <option key={opt.value} value={opt.value}>
+                              <option key={String(opt.value)} value={opt.value}>
                                 {opt.label}
                               </option>
                             ))}
@@ -382,10 +412,10 @@ export default function CreateGame() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setOptions(DEFAULT_GAME_OPTIONS)}
-                      className="w-full text-zinc-500"
+                      onClick={() => setOptions({ ...DEFAULT_GAME_OPTIONS, theme: options.theme })}
+                      className="w-full opacity-60"
                     >
-                      Reset to defaults
+                      Reset to defaults (keep theme)
                     </Button>
                   )}
                 </CardContent>
@@ -396,7 +426,7 @@ export default function CreateGame() {
 
         {/* Error Message */}
         {error && (
-          <div className="rounded-md bg-red-50 p-4 text-sm text-red-600">
+          <div className="rounded-md p-4 text-sm" style={{ background: 'var(--bust-bg)', color: 'var(--bust-border)' }}>
             {error}
           </div>
         )}
@@ -414,6 +444,7 @@ export default function CreateGame() {
             onClick={handleCreateGame}
             disabled={isCreating}
             className="flex-1"
+            style={{ background: 'var(--accent)', color: 'var(--accent-foreground)' }}
           >
             {isCreating ? "Creating..." : "Start Game"}
           </Button>

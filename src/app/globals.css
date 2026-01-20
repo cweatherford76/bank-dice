@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+/* ===== BASE VARIABLES ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #ffffff;
+  --card-border: #e4e4e7;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #3b82f6;
+  --accent-foreground: #ffffff;
 }
 
 @theme inline {
@@ -12,15 +19,239 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===== CLASSIC THEME (Light - Default base) ===== */
+.theme-classic {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card-bg: #ffffff;
+  --card-border: #e4e4e7;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #3b82f6;
+  --accent-foreground: #ffffff;
+  --safe-zone-bg: #fef9c3;
+  --safe-zone-border: #facc15;
+  --danger-zone-bg: #dbeafe;
+  --danger-zone-border: #3b82f6;
+  --bust-bg: #fee2e2;
+  --bust-border: #ef4444;
+  --double-bg: #f3e8ff;
+  --double-border: #a855f7;
+  --bank-btn-bg: #22c55e;
+  --bank-btn-hover: #16a34a;
+}
+
+.theme-classic body,
+body.theme-classic {
+  background: linear-gradient(to bottom, #f4f4f5, #e4e4e7);
+}
+
+/* ===== MODERN THEME (Dark Futuristic) ===== */
+.theme-modern {
+  --background: #0a0f1a;
+  --foreground: #e2e8f0;
+  --card-bg: rgba(15, 23, 42, 0.8);
+  --card-border: rgba(56, 189, 248, 0.2);
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #06b6d4;
+  --accent-foreground: #0a0f1a;
+  --safe-zone-bg: rgba(6, 182, 212, 0.15);
+  --safe-zone-border: #06b6d4;
+  --danger-zone-bg: rgba(139, 92, 246, 0.15);
+  --danger-zone-border: #8b5cf6;
+  --bust-bg: rgba(239, 68, 68, 0.2);
+  --bust-border: #ef4444;
+  --double-bg: rgba(139, 92, 246, 0.2);
+  --double-border: #8b5cf6;
+  --bank-btn-bg: #06b6d4;
+  --bank-btn-hover: #0891b2;
+  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.4);
+  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.theme-modern body,
+body.theme-modern {
+  background: linear-gradient(135deg, #0a0f1a 0%, #1a1f35 50%, #0f172a 100%);
+}
+
+/* ===== TRON THEME (Black with Cyan Grid) ===== */
+.theme-tron {
+  --background: #000000;
+  --foreground: #e0e0e0;
+  --card-bg: #0a0a0a;
+  --card-border: rgba(0, 212, 255, 0.3);
+  --muted: #141414;
+  --muted-foreground: #888888;
+  --accent: #00d4ff;
+  --accent-foreground: #000000;
+  --safe-zone-bg: rgba(0, 212, 255, 0.1);
+  --safe-zone-border: #00d4ff;
+  --danger-zone-bg: rgba(255, 102, 0, 0.1);
+  --danger-zone-border: #ff6600;
+  --bust-bg: rgba(255, 102, 0, 0.2);
+  --bust-border: #ff6600;
+  --double-bg: rgba(168, 85, 247, 0.2);
+  --double-border: #a855f7;
+  --bank-btn-bg: #00d4ff;
+  --bank-btn-hover: #0a8fb3;
+  --tron-cyan-glow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+  --tron-orange-glow: 0 0 10px rgba(255, 102, 0, 0.5), 0 0 20px rgba(255, 102, 0, 0.3);
+}
+
+.theme-tron body,
+body.theme-tron {
+  background: #000000;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ===== RETRO ARCADE THEME (Neon Pink/Cyan) ===== */
+.theme-retro-arcade {
+  --background: #0d0221;
+  --foreground: #00ffff;
+  --card-bg: #1a0533;
+  --card-border: rgba(255, 45, 149, 0.4);
+  --muted: #2d0a4e;
+  --muted-foreground: #00cccc;
+  --accent: #ff2d95;
+  --accent-foreground: #0d0221;
+  --safe-zone-bg: rgba(0, 255, 255, 0.1);
+  --safe-zone-border: #00ffff;
+  --danger-zone-bg: rgba(255, 45, 149, 0.1);
+  --danger-zone-border: #ff2d95;
+  --bust-bg: rgba(255, 107, 0, 0.2);
+  --bust-border: #ff6b00;
+  --double-bg: rgba(191, 0, 255, 0.2);
+  --double-border: #bf00ff;
+  --bank-btn-bg: #39ff14;
+  --bank-btn-hover: #2ecc10;
+  --neon-pink-glow: 0 0 5px #ff2d95, 0 0 10px #ff2d95, 0 0 20px #ff2d95;
+  --neon-cyan-glow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.theme-retro-arcade body,
+body.theme-retro-arcade {
+  background: linear-gradient(135deg, #0d0221 0%, #1a0533 50%, #2d1b4e 100%);
+}
+
+/* ===== RETRO NEON THEME (Dark Purple/Vibrant) ===== */
+.theme-retro-neon {
+  --background: #0d0d1a;
+  --foreground: #e0e0ff;
+  --card-bg: #1a1a2e;
+  --card-border: #2a2a4e;
+  --muted: #1a1a2e;
+  --muted-foreground: #9999bb;
+  --accent: #ff00ff;
+  --accent-foreground: #0d0d1a;
+  --safe-zone-bg: rgba(0, 255, 255, 0.1);
+  --safe-zone-border: #00ffff;
+  --danger-zone-bg: rgba(255, 0, 255, 0.1);
+  --danger-zone-border: #ff00ff;
+  --bust-bg: rgba(255, 107, 53, 0.2);
+  --bust-border: #ff6b35;
+  --double-bg: rgba(255, 105, 180, 0.2);
+  --double-border: #ff69b4;
+  --bank-btn-bg: #39ff14;
+  --bank-btn-hover: #2ecc10;
+}
+
+.theme-retro-neon body,
+body.theme-retro-neon {
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 100%);
+}
+
+/* ===== THEMED COMPONENT STYLES ===== */
+
+/* Cards with theme support */
+.themed-card {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+/* Zone indicators */
+.zone-safe {
+  background: var(--safe-zone-bg);
+  border-color: var(--safe-zone-border);
+}
+
+.zone-danger {
+  background: var(--danger-zone-bg);
+  border-color: var(--danger-zone-border);
+}
+
+.zone-bust {
+  background: var(--bust-bg);
+  border-color: var(--bust-border);
+}
+
+/* Result types */
+.result-double {
+  background: var(--double-bg);
+  border-color: var(--double-border);
+}
+
+/* Glow effects for dark themes */
+.theme-modern .glow-accent,
+.theme-tron .glow-accent,
+.theme-retro-arcade .glow-accent,
+.theme-retro-neon .glow-accent {
+  box-shadow: 0 0 10px var(--accent), 0 0 20px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Text shadow for neon effects */
+.theme-retro-arcade .neon-text,
+.theme-retro-neon .neon-text {
+  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+}
+
+/* TRON grid on card backgrounds */
+.theme-tron .tron-grid {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Pulsing glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--accent), 0 0 10px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--accent), 0 0 25px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Scanline effect for arcade theme */
+.theme-retro-arcade .scanlines::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
 }

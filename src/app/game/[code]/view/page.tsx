@@ -9,6 +9,7 @@ import { PlayerScoreboard } from "@/components/game/PlayerScoreboard";
 import { RollHistory } from "@/components/game/RollHistory";
 import { createClient } from "@/lib/supabase/client";
 import { Game, Player, Roll } from "@/types/game";
+import { getTheme } from "@/lib/themes";
 
 interface ViewerState {
   game: Game | null;
@@ -32,6 +33,16 @@ export default function ViewerPage() {
   });
 
   const supabase = createClient();
+// Apply theme to body
+  useEffect(() => {
+    if (state.game?.options?.theme) {
+      const theme = getTheme(state.game.options.theme);
+      document.body.className = theme.cssClass;
+    }
+    return () => {
+      document.body.className = "";
+    };
+  }, [state.game?.options?.theme]);
 
   // Calculate current player based on roll count
   const currentPlayerId = useMemo(() => {
@@ -109,6 +120,7 @@ export default function ViewerPage() {
             bankDelay: game.opt_bank_delay,
             safeZoneRolls: game.opt_safe_zone_rolls,
             doubleDown: game.opt_double_down,
+            theme: game.opt_theme || "modern",
           },
         };
 

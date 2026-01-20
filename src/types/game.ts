@@ -4,6 +4,9 @@ export type GameStatus = "setup" | "active" | "completed";
 // Result of a dice roll
 export type RollResultType = "normal" | "double" | "seven" | "bust";
 
+// Theme options
+export type ThemeId = 'modern' | 'classic' | 'tron' | 'retro-arcade' | 'retro-neon';
+
 // Game options that can be configured at creation
 export interface GameOptions {
   roundCount: number;           // Total rounds (10, 15, 20, or 25)
@@ -17,6 +20,7 @@ export interface GameOptions {
   bankDelay: boolean;           // Banks not secured until next roll
   safeZoneRolls: number;        // Number of safe rolls (3, 4, or 5)
   doubleDown: boolean;          // Players can double down once per game
+  theme: ThemeId;               // Visual theme for the game
 }
 
 // Default game options
@@ -32,6 +36,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   bankDelay: false,
   safeZoneRolls: 3,
   doubleDown: false,
+  theme: 'modern',
 };
 
 // Player state
