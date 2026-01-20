@@ -88,14 +88,14 @@ export function DiceInput({
             Doubles
           </Button>
           {showDoublesMenu && !inSafeZone && (
-            <div className="absolute top-full right-0 mt-1 bg-white border rounded-md shadow-lg z-10 p-2 flex gap-1">
+            <div className="absolute top-full right-0 mt-1 bg-slate-900/95 border border-violet-500/30 rounded-lg shadow-xl shadow-violet-500/10 z-10 p-2 flex gap-1 backdrop-blur-sm">
               {[1, 2, 3, 4, 5, 6].map((val) => (
                 <Button
                   key={val}
                   variant="outline"
                   size="sm"
                   onClick={() => handleDouble(val)}
-                  className="w-10 h-10"
+                  className="w-10 h-10 border-violet-500/40 text-violet-300 hover:bg-violet-500/20 hover:border-violet-400"
                 >
                   {val}+{val}
                 </Button>

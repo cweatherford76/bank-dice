@@ -599,8 +599,8 @@ export default function GamePage() {
   // Loading state
   if (state.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
-        <div className="text-zinc-500">Loading game...</div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-slate-400">Loading game...</div>
       </div>
     );
   }
@@ -608,10 +608,10 @@ export default function GamePage() {
   // Error state
   if (state.error || !state.game) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
+      <div className="flex min-h-screen items-center justify-center">
         <Card className="w-80">
           <CardContent className="pt-6 text-center">
-            <p className="text-red-500">{state.error || "Game not found"}</p>
+            <p className="text-rose-400">{state.error || "Game not found"}</p>
             <Button onClick={() => router.push("/")} className="mt-4">
               Back to Home
             </Button>
@@ -628,12 +628,12 @@ export default function GamePage() {
     )[0];
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+      <div className="min-h-screen p-4">
         <div className="mx-auto max-w-md space-y-6 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-zinc-900">Game Over!</h1>
-            <p className="mt-2 text-xl text-zinc-600">
-              Winner: {winner.name} with {winner.totalScore.toLocaleString()}{" "}
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">Game Over!</h1>
+            <p className="mt-2 text-xl text-slate-300">
+              Winner: <span className="text-cyan-400">{winner.name}</span> with {winner.totalScore.toLocaleString()}{" "}
               points!
             </p>
           </div>
@@ -667,19 +667,19 @@ export default function GamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen p-4">
       <div className="mx-auto max-w-lg space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-zinc-900">Bank Dice</h1>
-            <p className="text-sm text-zinc-500">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Bank Dice</h1>
+            <p className="text-sm text-slate-400">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-zinc-400">Shareable Game Code</p>
-            <p className="font-mono text-lg font-bold tracking-wider">
+            <p className="text-xs text-slate-500">Shareable Game Code</p>
+            <p className="font-mono text-lg font-bold tracking-wider text-cyan-400">
               {state.game.joinCode}
             </p>
           </div>
@@ -745,8 +745,8 @@ export default function GamePage() {
 
       {/* End Dialog Overlay */}
       {showEndDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-sm">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <Card className="w-full max-w-sm border-cyan-500/30">
             <CardHeader>
               <CardTitle>Game Options</CardTitle>
               <CardDescription>

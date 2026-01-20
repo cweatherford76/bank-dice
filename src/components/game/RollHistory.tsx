@@ -24,12 +24,12 @@ const diceFaces: Record<number, string> = {
 };
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+  normal: "bg-slate-800/60 text-slate-300 border border-slate-700/50",
+  double: "bg-violet-500/20 text-violet-300 border border-violet-500/40 shadow-sm shadow-violet-500/20",
+  seven: "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm shadow-cyan-500/20",
+  bust: "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm shadow-rose-500/20",
+  snakeeyes: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/20",
+  lucky11: "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-500/20",
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -90,7 +90,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-lg border border-dashed border-slate-700 p-4 text-center text-sm text-slate-500 bg-slate-800/30">
         No rolls yet this round
       </div>
     );
@@ -98,7 +98,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-medium text-slate-400">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
@@ -107,7 +107,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
           return (
             <div
               key={roll.id}
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm ${
                 resultColors[colorKey]
               }`}
             >

@@ -28,12 +28,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo/Title */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-zinc-900">Bank Dice</h1>
-          <p className="mt-2 text-zinc-600">The press-your-luck dice game</p>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-400 to-pink-400 bg-clip-text text-transparent">Bank Dice</h1>
+          <p className="mt-2 text-slate-400">The press-your-luck dice game</p>
         </div>
 
         {/* Create Game Card */}
@@ -61,7 +61,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="joinCode">Game Code</Label>
+              <Label htmlFor="joinCode" className="text-slate-300">Game Code</Label>
               <Input
                 id="joinCode"
                 placeholder="Enter 8-character code"
@@ -73,7 +73,7 @@ export default function Home() {
                 maxLength={8}
                 className="text-center text-lg tracking-widest"
               />
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && <p className="text-sm text-rose-400">{error}</p>}
             </div>
             <Button
               onClick={handleJoinGame}
@@ -87,7 +87,7 @@ export default function Home() {
         </Card>
 
         {/* Footer */}
-        <p className="text-center text-sm text-zinc-500">
+        <p className="text-center text-sm text-slate-500">
           A family game tracker for the classic "Bank" dice game
         </p>
       </div>
