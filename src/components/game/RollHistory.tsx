@@ -75,7 +75,7 @@ function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: n
 
   // For doubles, hide the sum (just show "double")
   if (isDouble && roll.resultType === "double") {
-    return { label: "Double", colorKey: "double", hideSum: true };
+    return { label: "Doubles! Bank x2", colorKey: "double", hideSum: true };
   }
 
   // Default to the result type
