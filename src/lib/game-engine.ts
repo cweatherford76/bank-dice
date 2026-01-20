@@ -162,28 +162,26 @@ export function calculateBankPoints(
 }
 
 /**
- * Check if the lap is complete (for double each lap option)
- * A lap completes when turn cycles back to player 1's position
+ * Get the current turn position in rotation
  */
-export function isLapComplete(
-  currentTurnOrder: number,
-  totalPlayers: number,
-  rollNumber: number
-): boolean {
-  // Lap completes when we've had enough rolls for everyone
-  // and we're back at position 1
-  return rollNumber > totalPlayers && currentTurnOrder === 1;
+export function getCurrentTurnPosition(
+  rollNumber: number,
+  totalPlayers: number
+): number {
+  // Roll 1 is player 1, roll 2 is player 2, etc.
+  // After all players have rolled, cycle back
+  return ((rollNumber - 1) % totalPlayers) + 1;
 }
 
 /**
- * Calculate bank after lap completion (for double each lap option)
+ * Calculate bank bonus at end of round (for double each lap option)
+ * This doubles the bank at the end of each round before starting the next
  */
-export function calculateBankAfterLap(
+export function calculateBankAfterRound(
   currentBank: number,
-  options: GameOptions,
-  lapComplete: boolean
+  options: GameOptions
 ): number {
-  if (options.doubleEachLap && lapComplete) {
+  if (options.doubleEachLap) {
     return currentBank * 2;
   }
   return currentBank;
@@ -216,18 +214,6 @@ export function isValidJoinCode(code: string): boolean {
   if (code.length !== 8) return false;
   const validChars = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]+$/;
   return validChars.test(code.toUpperCase());
-}
-
-/**
- * Get the current turn position in rotation
- */
-export function getCurrentTurnPosition(
-  rollNumber: number,
-  totalPlayers: number
-): number {
-  // Roll 1 is player 1, roll 2 is player 2, etc.
-  // After all players have rolled, cycle back
-  return ((rollNumber - 1) % totalPlayers) + 1;
 }
 
 /**
