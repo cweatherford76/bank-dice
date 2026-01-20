@@ -54,33 +54,51 @@ body.theme-classic {
   background: linear-gradient(to bottom, #f4f4f5, #e4e4e7);
 }
 
-/* ===== MODERN THEME (Dark Futuristic) ===== */
+/* ===== MODERN THEME (Dark Futuristic with Glass-morphism) ===== */
 .theme-modern {
   --background: #0a0f1a;
   --foreground: #e2e8f0;
-  --card-bg: rgba(15, 23, 42, 0.8);
-  --card-border: rgba(56, 189, 248, 0.2);
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --card-border: rgba(6, 182, 212, 0.3);
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
   --accent: #06b6d4;
   --accent-foreground: #0a0f1a;
-  --safe-zone-bg: rgba(6, 182, 212, 0.15);
+  --secondary-accent: #8b5cf6;
+  --secondary-accent-foreground: #ffffff;
+  --safe-zone-bg: rgba(20, 184, 166, 0.15);
   --safe-zone-border: #06b6d4;
-  --danger-zone-bg: rgba(139, 92, 246, 0.15);
-  --danger-zone-border: #8b5cf6;
-  --bust-bg: rgba(239, 68, 68, 0.2);
-  --bust-border: #ef4444;
+  --danger-zone-bg: rgba(244, 63, 94, 0.15);
+  --danger-zone-border: #f43f5e;
+  --bust-bg: rgba(244, 63, 94, 0.25);
+  --bust-border: #f43f5e;
   --double-bg: rgba(139, 92, 246, 0.2);
   --double-border: #8b5cf6;
+  --snakeeyes-bg: rgba(16, 185, 129, 0.2);
+  --snakeeyes-border: #10b981;
+  --lucky11-bg: rgba(245, 158, 11, 0.2);
+  --lucky11-border: #f59e0b;
   --bank-btn-bg: #06b6d4;
   --bank-btn-hover: #0891b2;
-  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.4);
-  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.4);
+  --banked-color: #10b981;
+  --current-player-color: #06b6d4;
+  --score-color: #e2e8f0;
+  --glow-cyan: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3), 0 0 30px rgba(6, 182, 212, 0.15);
+  --glow-violet: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+  --glow-rose: 0 0 10px rgba(244, 63, 94, 0.5), 0 0 20px rgba(244, 63, 94, 0.3);
+  --glow-emerald: 0 0 10px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+  --glow-amber: 0 0 10px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.3);
 }
 
 .theme-modern body,
 body.theme-modern {
   background: linear-gradient(135deg, #0a0f1a 0%, #1a1f35 50%, #0f172a 100%);
+}
+
+/* Glass-morphism cards for modern theme */
+.theme-modern .themed-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* ===== TRON THEME (Black with Cyan Grid) ===== */
