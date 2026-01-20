@@ -65,7 +65,7 @@ const GAME_OPTIONS_CONFIG: GameOptionConfig[] = [
   {
     key: "doubleEachLap",
     label: "Double Each Lap",
-    description: "Bank doubles at the end of each round",
+    description: "Bank doubles after every player has rolled",
     type: "boolean",
   },
   {
