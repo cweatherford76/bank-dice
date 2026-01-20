@@ -116,33 +116,35 @@ body.theme-tron {
   background-size: 50px 50px;
 }
 
-/* ===== RETRO ARCADE THEME (Neon Pink/Cyan) ===== */
+/* ===== RETRO ARCADE THEME (Neon Pink/Cyan/Green/Yellow) ===== */
 .theme-retro-arcade {
   --background: #0d0221;
-  --foreground: #00ffff;
+  --foreground: #00ffff;              /* Electric Cyan - main text */
   --card-bg: #1a0533;
-  --card-border: rgba(255, 45, 149, 0.4);
+  --card-border: #bf00ff;             /* Neon Purple - card borders */
   --muted: #2d0a4e;
-  --muted-foreground: #00cccc;
-  --accent: #ff2d95;
-  --accent-foreground: #0d0221;
-  --safe-zone-bg: rgba(0, 255, 255, 0.1);
-  --safe-zone-border: #00ffff;
-  --danger-zone-bg: rgba(255, 45, 149, 0.1);
+  --muted-foreground: #00cccc;        /* Dimmer cyan for secondary text */
+  --accent: #ff2d95;                  /* Neon Pink - primary buttons, titles */
+  --accent-foreground: #ffffff;
+  --score-color: #ffff00;             /* Neon Yellow - scores, bank totals */
+  --safe-zone-bg: rgba(57, 255, 20, 0.15);
+  --safe-zone-border: #39ff14;        /* Neon Green - safe zones */
+  --danger-zone-bg: rgba(255, 45, 149, 0.15);
   --danger-zone-border: #ff2d95;
-  --bust-bg: rgba(255, 107, 0, 0.2);
-  --bust-border: #ff6b00;
+  --bust-bg: rgba(255, 45, 149, 0.25);
+  --bust-border: #ff2d95;
   --double-bg: rgba(191, 0, 255, 0.2);
-  --double-border: #bf00ff;
-  --bank-btn-bg: #39ff14;
+  --double-border: #bf00ff;           /* Neon Purple */
+  --bank-btn-bg: #39ff14;             /* Neon Green - bank button */
   --bank-btn-hover: #2ecc10;
   --neon-pink-glow: 0 0 5px #ff2d95, 0 0 10px #ff2d95, 0 0 20px #ff2d95;
   --neon-cyan-glow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  --neon-green-glow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
 }
 
 .theme-retro-arcade body,
 body.theme-retro-arcade {
-  background: linear-gradient(135deg, #0d0221 0%, #1a0533 50%, #2d1b4e 100%);
+  background: linear-gradient(135deg, #0d0221 0%, #1a0533 100%);
 }
 
 /* ===== RETRO NEON THEME (Dark Purple/Vibrant) ===== */
