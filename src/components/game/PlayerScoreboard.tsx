@@ -28,7 +28,7 @@ export function PlayerScoreboard({
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">Player Scores</h3>
+      <h3 className="text-sm font-medium text-[var(--muted-foreground)]">Player Scores</h3>
       <div className="space-y-2">
         {sortedPlayers.map((player, index) => {
           const canBank = !player.hasBanked && canBankAtAll;
@@ -54,7 +54,7 @@ export function PlayerScoreboard({
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
                   isLeading
                     ? "bg-yellow-400 text-yellow-900"
-                    : "bg-zinc-100 text-zinc-600"
+                    : "bg-[var(--muted)] text-[var(--muted-foreground)]"
                 }`}
               >
                 {index + 1}

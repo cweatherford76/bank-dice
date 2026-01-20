@@ -611,8 +611,8 @@ export default function GamePage() {
   // Loading state
   if (state.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
-        <div className="text-zinc-500">Loading game...</div>
+      <div className="flex min-h-screen items-center justify-center bg-[var(--background)]">
+        <div className="text-[var(--muted-foreground)]">Loading game...</div>
       </div>
     );
   }
@@ -620,7 +620,7 @@ export default function GamePage() {
   // Error state
   if (state.error || !state.game) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
+      <div className="flex min-h-screen items-center justify-center bg-[var(--background)]">
         <Card className="w-80">
           <CardContent className="pt-6 text-center">
             <p className="text-red-500">{state.error || "Game not found"}</p>
@@ -640,11 +640,11 @@ export default function GamePage() {
     )[0];
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+      <div className="min-h-screen bg-[var(--background)] p-4">
         <div className="mx-auto max-w-md space-y-6 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-zinc-900">Game Over!</h1>
-            <p className="mt-2 text-xl text-zinc-600">
+            <h1 className="text-4xl font-bold text-[var(--foreground)]">Game Over!</h1>
+            <p className="mt-2 text-xl text-[var(--foreground)] opacity-70">
               Winner: {winner.name} with {winner.totalScore.toLocaleString()}{" "}
               points!
             </p>
@@ -679,18 +679,18 @@ export default function GamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen bg-[var(--background)] p-4">
       <div className="mx-auto max-w-lg space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-zinc-900">Bank Dice</h1>
-            <p className="text-sm text-zinc-500">
+            <h1 className="text-xl font-bold text-[var(--foreground)]">Bank Dice</h1>
+            <p className="text-sm text-[var(--muted-foreground)]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-zinc-400">Shareable Game Code</p>
+            <p className="text-xs text-[var(--muted-foreground)] opacity-70">Shareable Game Code</p>
             <p className="font-mono text-lg font-bold tracking-wider">
               {state.game.joinCode}
             </p>

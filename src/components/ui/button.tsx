@@ -9,16 +9,16 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "default", ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50";
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)] disabled:pointer-events-none disabled:opacity-50";
 
     const variants = {
-      default: "bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90",
-      destructive: "bg-red-500 text-zinc-50 shadow-sm hover:bg-red-500/90",
+      default: "bg-[var(--accent)] text-[var(--accent-foreground)] shadow hover:opacity-90",
+      destructive: "bg-red-500 text-white shadow-sm hover:bg-red-500/90",
       outline:
-        "border border-zinc-200 bg-white shadow-sm hover:bg-zinc-100 hover:text-zinc-900",
-      secondary: "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-100/80",
-      ghost: "hover:bg-zinc-100 hover:text-zinc-900",
-      link: "text-zinc-900 underline-offset-4 hover:underline",
+        "border border-[var(--card-border)] bg-[var(--card-bg)] shadow-sm hover:bg-[var(--muted)] text-[var(--foreground)]",
+      secondary: "bg-[var(--muted)] text-[var(--foreground)] shadow-sm hover:opacity-80",
+      ghost: "hover:bg-[var(--muted)] text-[var(--foreground)]",
+      link: "text-[var(--accent)] underline-offset-4 hover:underline",
     };
 
     const sizes = {

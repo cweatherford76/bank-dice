@@ -27,7 +27,7 @@ export function BankDisplay({
         {inDangerZone ? "Live Game" : "Safe Zone"}
       </div>
       <motion.div
-        className="my-2 text-6xl font-bold text-zinc-900"
+        className="my-2 text-6xl font-bold text-[var(--foreground)]"
         key={bankTotal}
         initial={{ scale: 1.2 }}
         animate={{ scale: 1 }}

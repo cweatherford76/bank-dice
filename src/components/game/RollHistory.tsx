@@ -15,7 +15,7 @@ interface RollHistoryProps {
 }
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
+  normal: "bg-[var(--muted)] text-[var(--foreground)]",
   double: "bg-purple-100 text-purple-800",
   seven: "bg-blue-100 text-blue-800",
   bust: "bg-red-100 text-red-800",
@@ -81,7 +81,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-lg border border-dashed border-[var(--card-border)] p-4 text-center text-sm text-[var(--muted-foreground)]">
         No rolls yet this round
       </div>
     );
@@ -89,7 +89,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-medium text-[var(--muted-foreground)]">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
