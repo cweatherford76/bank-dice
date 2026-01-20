@@ -28,12 +28,19 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo/Title */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-zinc-900">Bank Dice</h1>
-          <p className="mt-2 text-zinc-600">The press-your-luck dice game</p>
+          <h1
+            className="text-5xl font-bold text-[#ff2d95] uppercase tracking-wider"
+            style={{ textShadow: '0 0 10px #ff2d95, 0 0 20px #ff2d95, 0 0 40px #ff2d95' }}
+          >
+            Bank Dice
+          </h1>
+          <p className="mt-2 text-[#00ffff] uppercase tracking-widest text-sm">
+            The press-your-luck dice game
+          </p>
         </div>
 
         {/* Create Game Card */}
@@ -73,7 +80,7 @@ export default function Home() {
                 maxLength={8}
                 className="text-center text-lg tracking-widest"
               />
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && <p className="text-sm text-[#ff3333]">{error}</p>}
             </div>
             <Button
               onClick={handleJoinGame}
@@ -87,7 +94,7 @@ export default function Home() {
         </Card>
 
         {/* Footer */}
-        <p className="text-center text-sm text-zinc-500">
+        <p className="text-center text-sm text-[#bf00ff]">
           A family game tracker for the classic "Bank" dice game
         </p>
       </div>

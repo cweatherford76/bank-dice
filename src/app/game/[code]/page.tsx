@@ -599,8 +599,8 @@ export default function GamePage() {
   // Loading state
   if (state.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
-        <div className="text-zinc-500">Loading game...</div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-[#00ffff] animate-pulse">Loading game...</div>
       </div>
     );
   }
@@ -608,10 +608,10 @@ export default function GamePage() {
   // Error state
   if (state.error || !state.game) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-100">
+      <div className="flex min-h-screen items-center justify-center">
         <Card className="w-80">
           <CardContent className="pt-6 text-center">
-            <p className="text-red-500">{state.error || "Game not found"}</p>
+            <p className="text-[#ff3333]">{state.error || "Game not found"}</p>
             <Button onClick={() => router.push("/")} className="mt-4">
               Back to Home
             </Button>
@@ -628,11 +628,16 @@ export default function GamePage() {
     )[0];
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+      <div className="min-h-screen p-4">
         <div className="mx-auto max-w-md space-y-6 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-zinc-900">Game Over!</h1>
-            <p className="mt-2 text-xl text-zinc-600">
+            <h1
+              className="text-4xl font-bold text-[#39ff14] uppercase"
+              style={{ textShadow: '0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14' }}
+            >
+              Game Over!
+            </h1>
+            <p className="mt-2 text-xl text-[#ffff00]" style={{ textShadow: '0 0 5px #ffff00' }}>
               Winner: {winner.name} with {winner.totalScore.toLocaleString()}{" "}
               points!
             </p>
@@ -667,19 +672,27 @@ export default function GamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 p-4">
+    <div className="min-h-screen p-4">
       <div className="mx-auto max-w-lg space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-zinc-900">Bank Dice</h1>
-            <p className="text-sm text-zinc-500">
+            <h1
+              className="text-xl font-bold text-[#ff2d95] uppercase tracking-wider"
+              style={{ textShadow: '0 0 5px #ff2d95' }}
+            >
+              Bank Dice
+            </h1>
+            <p className="text-sm text-[#00ffff]">
               Round {state.game.currentRound} of {state.game.options.roundCount}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-zinc-400">Shareable Game Code</p>
-            <p className="font-mono text-lg font-bold tracking-wider">
+            <p className="text-xs text-[#bf00ff]">Shareable Game Code</p>
+            <p
+              className="font-mono text-lg font-bold tracking-wider text-[#00ffff]"
+              style={{ textShadow: '0 0 5px #00ffff' }}
+            >
               {state.game.joinCode}
             </p>
           </div>
@@ -745,7 +758,7 @@ export default function GamePage() {
 
       {/* End Dialog Overlay */}
       {showEndDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
           <Card className="w-full max-w-sm">
             <CardHeader>
               <CardTitle>Game Options</CardTitle>

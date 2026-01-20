@@ -28,7 +28,7 @@ export function PlayerScoreboard({
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">Player Scores</h3>
+      <h3 className="text-sm font-bold uppercase tracking-wider text-[#00ffff]">Player Scores</h3>
       <div className="space-y-2">
         {sortedPlayers.map((player, index) => {
           const canBank = !player.hasBanked && canBankAtAll;
@@ -40,10 +40,10 @@ export function PlayerScoreboard({
               key={player.id}
               className={`flex items-center gap-3 rounded-lg border-2 p-3 ${
                 isCurrentPlayer
-                  ? "border-green-500 bg-green-50"
+                  ? "border-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_10px_#39ff14]"
                   : player.hasBanked
-                  ? "border-green-200 bg-green-50"
-                  : "border-zinc-200 bg-white"
+                  ? "border-[#00ffff] bg-[#00ffff]/10"
+                  : "border-[#bf00ff]/50 bg-[#1a0533]/50"
               }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -53,8 +53,8 @@ export function PlayerScoreboard({
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
                   isLeading
-                    ? "bg-yellow-400 text-yellow-900"
-                    : "bg-zinc-100 text-zinc-600"
+                    ? "bg-[#ffff00] text-[#0d0221] shadow-[0_0_10px_#ffff00]"
+                    : "bg-[#bf00ff]/30 text-[#bf00ff]"
                 }`}
               >
                 {index + 1}
@@ -62,9 +62,9 @@ export function PlayerScoreboard({
 
               {/* Player Info */}
               <div className="flex-1">
-                <div className="font-medium">{player.name}</div>
+                <div className="font-bold text-[#00ffff]">{player.name}</div>
                 {player.hasBanked && player.currentRoundBanked !== null && (
-                  <div className="text-xs text-green-600">
+                  <div className="text-xs text-[#39ff14] font-bold">
                     Banked +{player.currentRoundBanked.toLocaleString()}
                   </div>
                 )}
@@ -72,7 +72,7 @@ export function PlayerScoreboard({
 
               {/* Score */}
               <div className="text-right">
-                <div className="text-lg font-bold">
+                <div className="text-lg font-bold text-[#ffff00]" style={{ textShadow: '0 0 5px #ffff00' }}>
                   {player.totalScore.toLocaleString()}
                 </div>
               </div>
@@ -84,9 +84,9 @@ export function PlayerScoreboard({
                   size="sm"
                   onClick={() => onBank(player.id)}
                   disabled={!canBank}
-                  className={player.hasBanked ? "text-green-600" : ""}
+                  className={player.hasBanked ? "text-[#39ff14]" : ""}
                 >
-                  {player.hasBanked ? "✓ Banked" : "Bank"}
+                  {player.hasBanked ? "BANKED" : "BANK"}
                 </Button>
               )}
             </motion.div>

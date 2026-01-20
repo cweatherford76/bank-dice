@@ -88,7 +88,7 @@ export function DiceInput({
             Doubles
           </Button>
           {showDoublesMenu && !inSafeZone && (
-            <div className="absolute top-full right-0 mt-1 bg-white border rounded-md shadow-lg z-10 p-2 flex gap-1">
+            <div className="absolute top-full right-0 mt-1 bg-[#1a0533] border-2 border-[#bf00ff] rounded-md shadow-[0_0_15px_#bf00ff] z-10 p-2 flex gap-1">
               {[1, 2, 3, 4, 5, 6].map((val) => (
                 <Button
                   key={val}

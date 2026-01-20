@@ -9,16 +9,16 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "default", ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50";
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ffff] disabled:pointer-events-none disabled:opacity-50";
 
     const variants = {
-      default: "bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90",
-      destructive: "bg-red-500 text-zinc-50 shadow-sm hover:bg-red-500/90",
+      default: "bg-[#ff2d95] text-white shadow-[0_0_10px_#ff2d95,0_0_20px_#ff2d95] hover:shadow-[0_0_15px_#ff2d95,0_0_30px_#ff2d95] hover:bg-[#ff5aab]",
+      destructive: "bg-[#ff3333] text-white shadow-[0_0_10px_#ff3333,0_0_20px_#ff3333] hover:shadow-[0_0_15px_#ff3333,0_0_30px_#ff3333] hover:bg-[#ff5555]",
       outline:
-        "border border-zinc-200 bg-white shadow-sm hover:bg-zinc-100 hover:text-zinc-900",
-      secondary: "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-100/80",
-      ghost: "hover:bg-zinc-100 hover:text-zinc-900",
-      link: "text-zinc-900 underline-offset-4 hover:underline",
+        "border-2 border-[#00ffff] bg-transparent text-[#00ffff] shadow-[0_0_5px_#00ffff] hover:shadow-[0_0_10px_#00ffff,0_0_20px_#00ffff] hover:bg-[#00ffff]/10",
+      secondary: "bg-[#bf00ff] text-white shadow-[0_0_10px_#bf00ff] hover:shadow-[0_0_15px_#bf00ff,0_0_25px_#bf00ff] hover:bg-[#d433ff]",
+      ghost: "text-[#00ffff] hover:bg-[#00ffff]/10 hover:text-[#00ffff]",
+      link: "text-[#00ffff] underline-offset-4 hover:underline hover:text-[#39ff14]",
     };
 
     const sizes = {

@@ -24,12 +24,12 @@ const diceFaces: Record<number, string> = {
 };
 
 const resultColors: Record<string, string> = {
-  normal: "bg-zinc-100 text-zinc-800",
-  double: "bg-purple-100 text-purple-800",
-  seven: "bg-blue-100 text-blue-800",
-  bust: "bg-red-100 text-red-800",
-  snakeeyes: "bg-green-100 text-green-800",
-  lucky11: "bg-amber-100 text-amber-800",
+  normal: "bg-[#bf00ff]/20 text-[#bf00ff] border border-[#bf00ff]/50",
+  double: "bg-[#ff2d95]/20 text-[#ff2d95] border border-[#ff2d95]/50 shadow-[0_0_5px_#ff2d95]",
+  seven: "bg-[#00ffff]/20 text-[#00ffff] border border-[#00ffff]/50",
+  bust: "bg-[#ff3333]/20 text-[#ff3333] border border-[#ff3333]/50 shadow-[0_0_10px_#ff3333]",
+  snakeeyes: "bg-[#39ff14]/20 text-[#39ff14] border border-[#39ff14]/50 shadow-[0_0_10px_#39ff14]",
+  lucky11: "bg-[#ffff00]/20 text-[#ffff00] border border-[#ffff00]/50 shadow-[0_0_10px_#ffff00]",
 };
 
 function getDisplayLabel(roll: Roll, gameOptions?: GameOptions, safeZoneRolls: number = 3): { label: string; colorKey: string } {
@@ -90,7 +90,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   if (currentRoundRolls.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500">
+      <div className="rounded-lg border-2 border-dashed border-[#bf00ff]/50 p-4 text-center text-sm text-[#00ffff]/70">
         No rolls yet this round
       </div>
     );
@@ -98,7 +98,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
 
   return (
     <div className="space-y-2">
-      <h3 className="text-sm font-medium text-zinc-500">
+      <h3 className="text-sm font-bold uppercase tracking-wider text-[#00ffff]">
         Round {currentRound} Rolls
       </h3>
       <div className="max-h-48 space-y-1 overflow-y-auto">
@@ -111,7 +111,7 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                 resultColors[colorKey]
               }`}
             >
-              <span className="font-medium">#{roll.rollNumber}</span>
+              <span className="font-bold">#{roll.rollNumber}</span>
 
               {editingRollId === roll.id ? (
                 <>
@@ -148,10 +148,10 @@ export function RollHistory({ rolls, currentRound, isBanker, onEditRoll, gameOpt
                   </span>
                   <span>=</span>
                   <span className="font-bold">{roll.die1 + roll.die2}</span>
-                  <span className="ml-auto text-xs uppercase tracking-wide">
+                  <span className="ml-auto text-xs uppercase tracking-wide font-bold">
                     {label}
                   </span>
-                  <span className="font-medium">→ {roll.bankAfter}</span>
+                  <span className="font-bold">→ {roll.bankAfter}</span>
                   {isBanker && onEditRoll && (
                     <Button
                       size="sm"

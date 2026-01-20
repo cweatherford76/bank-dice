@@ -19,15 +19,22 @@ export function BankDisplay({
 
   return (
     <motion.div
-      className={"rounded-xl p-6 text-center border-2 " + (inDangerZone ? "bg-blue-50 border-blue-300" : "bg-yellow-50 border-yellow-300")}
+      className={"rounded-xl p-6 text-center border-2 " + (inDangerZone
+        ? "bg-[#1a0533]/80 border-[#ff2d95] shadow-[0_0_20px_#ff2d95,inset_0_0_30px_rgba(255,45,149,0.2)]"
+        : "bg-[#1a0533]/80 border-[#39ff14] shadow-[0_0_20px_#39ff14,inset_0_0_30px_rgba(57,255,20,0.2)]")}
       animate={bankTotal === 0 ? { x: [-5, 5, -5, 5, 0] } : {}}
       transition={{ duration: 0.4 }}
     >
-      <div className={"text-sm font-medium uppercase tracking-wide " + (inDangerZone ? "text-blue-600" : "text-yellow-600")}>
-        {inDangerZone ? "Live Game" : "Safe Zone"}
+      <div className={"text-sm font-bold uppercase tracking-widest " + (inDangerZone
+        ? "text-[#ff2d95]"
+        : "text-[#39ff14]")}
+        style={{ textShadow: inDangerZone ? '0 0 10px #ff2d95' : '0 0 10px #39ff14' }}
+      >
+        {inDangerZone ? "DANGER ZONE" : "SAFE ZONE"}
       </div>
       <motion.div
-        className="my-2 text-6xl font-bold text-zinc-900"
+        className="my-2 text-6xl font-bold text-[#ffff00]"
+        style={{ textShadow: '0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00' }}
         key={bankTotal}
         initial={{ scale: 1.2 }}
         animate={{ scale: 1 }}
@@ -37,7 +44,9 @@ export function BankDisplay({
       </motion.div>
       {lastResultMessage && (
         <motion.div
-          className={"mt-3 rounded-md px-3 py-2 text-sm " + (inDangerZone ? "bg-blue-100 text-blue-700" : "bg-yellow-100 text-yellow-700")}
+          className={"mt-3 rounded-md px-3 py-2 text-sm font-bold " + (inDangerZone
+            ? "bg-[#ff2d95]/20 text-[#ff2d95] border border-[#ff2d95]"
+            : "bg-[#39ff14]/20 text-[#39ff14] border border-[#39ff14]")}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
